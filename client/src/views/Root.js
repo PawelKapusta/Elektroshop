@@ -1,14 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import Button from '../components/atoms/Button/Button';
+import GlobalStyle from '../theme/GlobalStyle';
+import { theme } from '../theme/mainTheme';
+import Input from '../components/atoms/Input/Input';
 
-const MyButton = styled.button`
-  padding: 1px 2px;
-`;
-const App = () => (
+const Root = () => (
   <div>
-    <div className="App">App view</div>
-    <MyButton>Click me</MyButton>
+    <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <h1>Hello </h1>
+      <Button>Close / Save</Button>
+      <Button>Remove</Button>
+      <Input placeholder="search" search />
+    </ThemeProvider>
   </div>
 );
 
-export default App;
+export default Root;
