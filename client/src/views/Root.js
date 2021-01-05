@@ -1,26 +1,28 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import Button from '../components/atoms/Button/Button';
-import GlobalStyle from '../theme/GlobalStyle';
-import { theme } from '../theme/mainTheme';
-import Input from '../components/atoms/Input/Input';
-import Paragraph from '../components/atoms/Paragraph/Paragraph';
-import Heading from '../components/atoms/Heading/Heading';
-import ItemCard from '../components/molecules/ItemCard/ItemCard';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import MainTemplate from '../components/templates/MainTemplate';
+import Products from './Products';
+import Promotions from './Promotions';
+import Contact from './Contact';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import HomePage from './HomePage';
 
 const Root = () => (
-  <div>
-    <GlobalStyle />
-    <ThemeProvider theme={theme}>
-      <h1>Hello </h1>
-      <Button>Close / Save</Button>
-      <Button>Remove</Button>
-      <Input placeholder="search" search />
-      <Paragraph theme={theme}>this is my paragraph</Paragraph>
-      <Heading theme={theme}>Heading</Heading>
-      <ItemCard />
-    </ThemeProvider>
-  </div>
+  <BrowserRouter>
+    <>
+      <MainTemplate>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/products" component={Products} />
+          <Route path="/promotions" component={Promotions} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/sign-up" component={SignUp} />
+          <Route path="/sign-in" component={SignIn} />
+        </Switch>
+      </MainTemplate>
+    </>
+  </BrowserRouter>
 );
 
 export default Root;
