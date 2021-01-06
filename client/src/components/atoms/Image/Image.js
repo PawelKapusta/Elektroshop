@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import image from '../../../assets/images/computer.jpg';
 
 const ImageDiv = styled.div`
   width: 200px;
@@ -8,7 +7,7 @@ const ImageDiv = styled.div`
   object-fit: cover;
 `;
 
-const Image = () => (
+const Image = ({ image }) => (
   <ImageDiv>
     <img src={image} alt="imagePhoto" width="200px" />
   </ImageDiv>

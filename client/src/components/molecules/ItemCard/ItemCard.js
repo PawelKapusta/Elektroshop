@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
 import ButtonIcon from '../../atoms/ButtonIcon/ButtonIcon';
 import basketIcon from '../../../assets/icons/basket.svg';
 import Image from '../../atoms/Image/Image';
+import { routes } from '../../../Routes';
 
 const StyleWrapper = styled.div`
   min-height: 300px;
@@ -40,25 +42,40 @@ const AskButton = styled(Button)`
   background-color: ${({ theme }) => theme.blue};
 `;
 
-const ItemCard = () => (
-  <StyleWrapper>
-    <InnerWrapper yellow>
-      <Heading>Laptop X</Heading>
-    </InnerWrapper>
-    <InnerWrapper flex>
-      <Image />
-      <DataInfo>
-        A laptop computer is a small personal computer. They are designed to be more portable than
-        traditional desktop computers, with many of the same abilities. Laptops are able to be
-        folded flat for transportation and have a built-in keyboard and touchpad
-      </DataInfo>
-    </InnerWrapper>
-    <InnerWrapper flex>
-      <Paragraph>Price</Paragraph>
-      <AskButton blue>Ask a question</AskButton>
-      <ButtonIcon icon={basketIcon} />
-    </InnerWrapper>
-  </StyleWrapper>
-);
+class ItemCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false,
+    };
+  }
+
+  handleItemClick = () => this.setState({ redirect: true });
+
+  render() {
+    const { id, name, image, description, price } = this.props;
+
+    if (this.state.redirect) {
+      return <Redirect to={`${routes.products}/${id}`} />;
+    }
+
+    return (
+      <StyleWrapper onClick={this.handleItemClick}>
+        <InnerWrapper yellow>
+          <Heading>{name}</Heading>
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Image image={image} />
+          <DataInfo>{description}</DataInfo>
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{price}</Paragraph>
+          <AskButton blue>Ask a question</AskButton>
+          <ButtonIcon icon={basketIcon} />
+        </InnerWrapper>
+      </StyleWrapper>
+    );
+  }
+}
 
 export default ItemCard;
