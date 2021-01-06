@@ -4,7 +4,7 @@ import MainTemplate from '../components/templates/MainTemplate';
 import Products from './Products';
 import Promotions from './Promotions';
 import Contact from './Contact';
-import SignIn from './SignIn';
+
 import SignUp from './SignUp';
 import HomePage from './HomePage';
 
@@ -18,7 +18,6 @@ const Root = () => (
           <Route path="/promotions" component={Promotions} />
           <Route path="/contact" component={Contact} />
           <Route path="/sign-up" component={SignUp} />
-          <Route path="/sign-in" component={SignIn} />
         </Switch>
       </MainTemplate>
     </>

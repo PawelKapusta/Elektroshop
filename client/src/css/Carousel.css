@@ -1,0 +1,23 @@
+.image {
+  width: 70rem;
+  height: 35rem;
+  border-radius: 10px;
+}
+.slide-active img{
+  transition: all 0.5s ease-in-out;
+}
+.slide-active:hover img{
+  -webkit-transform: scale(1.1) rotate(-5deg);
+  -ms-transform: scale(1.1) rotate(-5deg);
+  transform: scale(1.1) rotate(-5deg);
+}
+.slide {
+  opacity: 0;
+  transition-duration: 1s ;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}

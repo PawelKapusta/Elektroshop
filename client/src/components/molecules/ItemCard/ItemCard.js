@@ -16,6 +16,7 @@ const StyleWrapper = styled.div`
   display: grid;
   grid-template-rows: 0.25fr 1fr;
   max-width: 100rem;
+  margin: 1% auto;
 `;
 const InnerWrapper = styled.div`
   padding: 17px 30px 10px;

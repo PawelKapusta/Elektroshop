@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-size: 1.6rem;
     font-family: "Montserrat", sans-serif;
+    background: #D3CCE3;
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3);
+
   }
 `;
 
