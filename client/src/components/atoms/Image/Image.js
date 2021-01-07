@@ -9,7 +9,7 @@ const ImageDiv = styled.div`
 
 const Image = ({ image }) => (
   <ImageDiv>
-    <img src={image} alt="imagePhoto" width="200px" />
+    <img src={image} alt="imagePhoto" width="200px" height="200px" />
   </ImageDiv>
 );
 

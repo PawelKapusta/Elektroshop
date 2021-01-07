@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
@@ -10,7 +10,8 @@ import Image from '../../atoms/Image/Image';
 import { routes } from '../../../Routes';
 
 const StyleWrapper = styled.div`
-  min-height: 300px;
+  height: 41rem;
+  width: 90rem;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   border-radius: 10px;
   overflow: hidden;
@@ -29,12 +30,27 @@ const InnerWrapper = styled.div`
     css`
       display: flex;
       flex-direction: row;
+      &:hover {
+        transition: all 0.1s ease-in-out;
+        background: #f5f5dc;
+        color: #010606;
+      }
+    `}
+  ${({ space }) =>
+    space &&
+    css`
+      display: flex;
+      flex-direction: row;
       justify-content: space-between;
     `}
 `;
-
+const Brand = styled(Paragraph)`
+  margin: 0 1%;
+  font-size: 3rem;
+  font-weight: 600;
+`;
 const DataInfo = styled(Paragraph)`
-  margin: 30px 0 10px;
+  margin: 50px 0 10px 30px;
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.s};
 `;
@@ -53,24 +69,29 @@ class ItemCard extends Component {
   handleItemClick = () => this.setState({ redirect: true });
 
   render() {
-    const { id, name, image, description, price } = this.props;
+    const { id, name, image, description, price, category } = this.props;
 
     if (this.state.redirect) {
       return <Redirect to={`${routes.products}/${id}`} />;
     }
 
     return (
-      <StyleWrapper onClick={this.handleItemClick}>
+      <StyleWrapper>
         <InnerWrapper yellow>
           <Heading>{name}</Heading>
         </InnerWrapper>
-        <InnerWrapper flex>
+        <InnerWrapper flex onClick={this.handleItemClick}>
           <Image image={image} />
           <DataInfo>{description}</DataInfo>
+          <Brand>{category}</Brand>
         </InnerWrapper>
-        <InnerWrapper flex>
-          <Paragraph>{price}</Paragraph>
-          <AskButton blue>Ask a question</AskButton>
+        <InnerWrapper space>
+          <Paragraph>{price} zł</Paragraph>
+          <AskButton blue>
+            <Link to="/contact" style={{ textDecoration: 'none' }}>
+              Ask a question
+            </Link>
+          </AskButton>
           <ButtonIcon icon={basketIcon} />
         </InnerWrapper>
       </StyleWrapper>
