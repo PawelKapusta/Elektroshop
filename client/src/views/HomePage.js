@@ -35,11 +35,12 @@ const HomePage = ({ products }) => {
   const productsSortedByID = products.sort((a, b) => b.id - a.id).slice(0, 3);
   return (
     <CardsSection>
-      <ImageCarousel slides={productsSortedByQuantity} />;<Newest>New items</Newest>
+      <ImageCarousel slides={productsSortedByQuantity} />
+      <Newest>New items</Newest>
       <Row>
         {productsSortedByID.map(({ image, name, price, id }) => (
           <Column>
-            <HomeCard image={image} name={name} price={price} id={id} />
+            <HomeCard image={image} name={name} price={price} id={id} key={id} />
           </Column>
         ))}
       </Row>

@@ -1,14 +1,12 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
 import styled from 'styled-components';
+import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import AuthTemplate from '../components/templates/AuthTemplate';
-import Heading from '../components/atoms/Heading/Heading';
-import Button from '../components/atoms/Button/Button';
 import { routes } from '../Routes';
 import Input from '../components/atoms/Input/Input';
-import { authenticate as authenticateAction } from '../actions/index';
+import Heading from '../components/atoms/Heading/Heading';
+import Button from '../components/atoms/Button/Button';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -31,29 +29,32 @@ const StyledLink = styled(Link)`
   text-transform: uppercase;
   margin: 20px 0 50px;
 `;
-
 const BtnStyled = styled(Button)`
-  background: #667db6;
-  background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
-  background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
+  background: #ee0979;
+  background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);
+  background: linear-gradient(to right, #ff6a00, #ee0979);
+
   &:hover {
     transition: all 0.6s ease-in-out;
-    background: #007991;
-    background: -webkit-linear-gradient(to right, #78ffd6, #007991);
-    background: linear-gradient(to right, #78ffd6, #007991);
+    background: #f7971e;
+    background: -webkit-linear-gradient(to right, #ffd200, #f7971e);
+    background: linear-gradient(to right, #ffd200, #f7971e);
   }
 `;
-const LoginPage = ({ authenticate }) => (
-  <AuthTemplate log={1}>
+const RegisterPage = () => (
+  <AuthTemplate>
     <Formik
-      initialValues={{ username: '', password: '' }}
+      initialValues={{
+        username: '',
+        password: '',
+      }}
       onSubmit={({ username, password }) => {
-        authenticate(username, password);
+        console.log(username, password);
       }}
     >
       {({ handleChange, handleBlur, values }) => (
         <>
-          <Heading>Sign in</Heading>
+          <Heading>Sign up</Heading>
           <StyledForm>
             <StyledInput
               type="text"
@@ -71,17 +72,12 @@ const LoginPage = ({ authenticate }) => (
               onBlur={handleBlur}
               value={values.title}
             />
-            <BtnStyled type="submit">sign in</BtnStyled>
+            <BtnStyled type="submit">register</BtnStyled>
           </StyledForm>
-          <StyledLink to={routes.register}>I want my account!</StyledLink>
+          <StyledLink to={routes.login}>I want to log in!</StyledLink>
         </>
       )}
     </Formik>
   </AuthTemplate>
 );
-
-const mapDispatchToProps = (dispatch) => ({
-  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
-});
-
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default RegisterPage;
