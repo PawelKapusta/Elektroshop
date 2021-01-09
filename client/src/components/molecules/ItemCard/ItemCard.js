@@ -69,6 +69,8 @@ const Row = styled.div`
   border-spacing: 1px;
 `;
 
+
+
 class ItemCard extends Component {
   constructor(props) {
     super(props);
@@ -116,5 +118,9 @@ class ItemCard extends Component {
     );
   }
 }
+
+
+
+
 
 export default ItemCard;
