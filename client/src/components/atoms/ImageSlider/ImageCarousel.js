@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import styled from 'styled-components';
-import { CarouselData } from './CarouselData';
 import '../../../css/Carousel.css';
+import { Link } from 'react-router-dom';
 import Heading from '../Heading/Heading';
 import Button from '../Button/Button';
+import { routes } from '../../../Routes';
 
 const Carousel = styled.div`
   position: relative;
@@ -66,7 +67,6 @@ const CheckButton = styled(Button)`
 const ImageCarousel = ({ slides }) => {
   const [current, setCurrent] = useState(0);
   const { length } = slides;
-
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
   };
@@ -83,10 +83,12 @@ const ImageCarousel = ({ slides }) => {
     <div>
       <Popular>The most popular items</Popular>
       <Carousel>
-        {CarouselData.map((slide, index) => (
+        {slides.map((slide, index) => (
           <div className={index === current ? 'slide-active' : 'slide'} key={index.id}>
             {index === current && <img src={slide.image} alt="SlideImage" className="image" />}
-            <CheckButton>Check it</CheckButton>
+            <Link to={`${routes.products}/${slides[index].id}`} style={{ textDecoration: 'none' }}>
+              <CheckButton>Check it</CheckButton>
+            </Link>
           </div>
         ))}
         <LeftArrow onClick={prevSlide} />

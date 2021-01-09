@@ -5,5 +5,5 @@ export const routes = {
   promotions: '/promotions',
   contact: '/contact',
   login: '/login',
-  registration: '/registration',
+  register: '/register',
 };
