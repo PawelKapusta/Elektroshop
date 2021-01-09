@@ -6,7 +6,6 @@ import Heading from '../atoms/Heading/Heading';
 import Paragraph from '../atoms/Paragraph/Paragraph';
 import Button from '../atoms/Button/Button';
 import { routes } from '../../Routes';
-import withContext from '../../hoc/withContext';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -77,4 +76,4 @@ DetailsTemplate.defaultProps = {
   category: 'General',
 };
 
-export default withContext(DetailsTemplate);
+export default DetailsTemplate;
