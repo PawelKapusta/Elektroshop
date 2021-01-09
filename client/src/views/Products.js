@@ -65,7 +65,7 @@ const Products = ({ products }) => (
           <Input />
         </Column>
       </Row>
-      <Results>X results</Results>
+      <Results>{products.length} results</Results>
     </SearchForm>
     <ItemList>
       {products.map(({ id, name, image, description, price, category, quantity }) => (

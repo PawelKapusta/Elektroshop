@@ -1,13 +1,17 @@
 import React from 'react';
 import DetailsTemplate from '../components/templates/DetailTemplate';
 
-/// ///import { routes } from '../Routes';
-
-const DetailsPage = () => (
+const DetailsPage = ({ id, name, image, description, quantity, category, price }) => (
   <>
-    <DetailsTemplate>
-      <p>lllll</p>
-    </DetailsTemplate>
+    <DetailsTemplate
+      id={id}
+      image={image}
+      quantity={quantity}
+      name={name}
+      description={description}
+      price={price}
+      category={category}
+    />
   </>
 );
 

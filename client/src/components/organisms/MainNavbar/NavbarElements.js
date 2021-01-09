@@ -85,8 +85,8 @@ export const NavBtnLink = styled(Link)`
     background: #fff;
     color: #010606;
   }
-  ${({ registration }) =>
-    registration &&
+  ${({ reg }) =>
+    reg &&
     css`
       background: #ff0000;
     `}

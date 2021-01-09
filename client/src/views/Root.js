@@ -6,10 +6,11 @@ import Products from './Products';
 import Promotions from './Promotions';
 import Contact from './Contact';
 import { routes } from '../Routes';
-import SignUp from './SignUp';
+import RegisterPage from './RegisterPage';
 import HomePage from './HomePage';
 import DetailsPage from './DetailsPage';
 import store from '../store';
+import LoginPage from './LoginPage';
 
 const Root = () => (
   <Provider store={store}>
@@ -22,7 +23,8 @@ const Root = () => (
             <Route path={routes.product} component={DetailsPage} />
             <Route path={routes.promotions} component={Promotions} />
             <Route path={routes.contact} component={Contact} />
-            <Route path={routes.registration} component={SignUp} />
+            <Route path={routes.register} component={RegisterPage} />
+            <Route path={routes.login} component={LoginPage} />
           </Switch>
         </MainTemplate>
       </>
