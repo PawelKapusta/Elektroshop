@@ -16,7 +16,7 @@ const MainNavbar = () => (
         <NavLink to="/Contact">Contact</NavLink>
       </NavMenu>
       <NavBtn>
-        <NavBtnLink to="/sign-up" registration>
+        <NavBtnLink to="/register" reg={1}>
           Sign up
         </NavBtnLink>
       </NavBtn>

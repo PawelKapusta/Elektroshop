@@ -22,9 +22,10 @@ const StyleWrapper = styled.div`
   margin: 1% auto;
 `;
 const InnerWrapper = styled.div`
-  padding: 17px 30px 10px;
+  padding: 11px 30px 10px;
   background-color: ${({ yellow, theme }) => (yellow ? theme.items : 'white')};
-
+  justify-content: space-between;
+  cursor: pointer;
   ${({ flex }) =>
     flex &&
     css`
@@ -36,6 +37,7 @@ const InnerWrapper = styled.div`
         color: #010606;
       }
     `}
+
   ${({ space }) =>
     space &&
     css`
@@ -57,6 +59,15 @@ const DataInfo = styled(Paragraph)`
 const AskButton = styled(Button)`
   background-color: ${({ theme }) => theme.blue};
 `;
+const Column = styled.div`
+  display: table-cell;
+`;
+const Row = styled.div`
+  display: table;
+  width: 175%;
+  table-layout: fixed;
+  border-spacing: 1px;
+`;
 
 class ItemCard extends Component {
   constructor(props) {
@@ -69,7 +80,7 @@ class ItemCard extends Component {
   handleItemClick = () => this.setState({ redirect: true });
 
   render() {
-    const { id, name, image, description, price, category } = this.props;
+    const { id, name, image, description, price, category, quantity } = this.props;
 
     if (this.state.redirect) {
       return <Redirect to={`${routes.products}/${id}`} />;
@@ -78,7 +89,14 @@ class ItemCard extends Component {
     return (
       <StyleWrapper>
         <InnerWrapper yellow>
-          <Heading>{name}</Heading>
+          <Row>
+            <Column>
+              <Heading>{name}</Heading>
+            </Column>
+            <Column>
+              <Paragraph>Quantity: {quantity}</Paragraph>
+            </Column>
+          </Row>
         </InnerWrapper>
         <InnerWrapper flex onClick={this.handleItemClick}>
           <Image image={image} />

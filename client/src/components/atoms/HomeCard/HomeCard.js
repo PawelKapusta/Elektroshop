@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../../../css/HomeCard.css';
+import { Link } from 'react-router-dom';
+import { routes } from '../../../Routes';
 import Heading from '../Heading/Heading';
 import Paragraph from '../Paragraph/Paragraph';
 
@@ -23,7 +25,7 @@ const Content = styled.div`
 `;
 const Name = styled(Heading)`
   margin: 1% auto;
-  text-decoration: underline;
+  text-decoration: none;
 `;
 const Price = styled(Paragraph)`
   position: absolute;
@@ -31,16 +33,18 @@ const Price = styled(Paragraph)`
   bottom: -27px;
   margin: 2% 2%;
 `;
-const HomeCard = ({ image, name, price }) => (
-  <Card>
-    <div className="image-container">
-      <img src={image} alt="imagePhoto" />
-    </div>
-    <Content>
-      <Name>{name}</Name>
-      <Price>{price}</Price>
-    </Content>
-  </Card>
+const HomeCard = ({ image, name, price, id }) => (
+  <Link to={`${routes.products}/${id}`} style={{ textDecoration: 'none' }}>
+    <Card>
+      <div className="image-container">
+        <img src={image} alt="imagePhoto" />
+      </div>
+      <Content>
+        <Name>{name}</Name>
+        <Price>{price} zł</Price>
+      </Content>
+    </Card>
+  </Link>
 );
 
 export default HomeCard;
