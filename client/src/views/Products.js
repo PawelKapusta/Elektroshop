@@ -137,7 +137,7 @@ const Products = () => (
       </Row>
       <Results>X results</Results>
     </SearchForm>
-
+    
     <ItemList>
       {products.map(({ id, name, image, description, price, category }) => (
         <ItemCard
