@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import LinesEllipsis from 'react-lines-ellipsis';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import ItemCard from '../components/molecules/ItemCard/ItemCard';
 import Input from '../components/atoms/Input/Input';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Heading from '../components/atoms/Heading/Heading';
+import ProductContext from '../context/ProductContext';
 
 const SearchForm = styled.div`
   margin-left: 5%;
@@ -41,71 +42,75 @@ const Results = styled(Paragraph)`
   font-size: 1.9rem;
   color: #dc143c;
 `;
-const Products = ({ products }) => (
-  <div>
-    <PageTitle>Search for product</PageTitle>
-    <SearchForm>
-      <Title>Name of product</Title>
-      <Input search />
-      <Title>Category</Title>
-      <Input search />
-      <Row>
-        <Column>
-          {' '}
-          <Title> Price from: </Title>{' '}
-        </Column>
-        <Column>
-          {' '}
-          <Input />
-        </Column>
-        <Column>
-          <Title> to: </Title>
-        </Column>
-        <Column>
-          <Input />
-        </Column>
-      </Row>
-      <Results>{products.length} results</Results>
-    </SearchForm>
+const Products = () => {
+  const { products } = useContext(ProductContext);
 
-    <ItemList>
-      {products.map(({ id, name, image, description, price, category, quantity }) => (
-        <ItemCard
-          id={id}
-          name={name}
-          image={image}
-          description={
-            <LinesEllipsis
-              text={description}
-              maxLine="3"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
-          }
-          price={price}
-          category={category}
-          quantity={quantity}
-          key={id}
-        />
-      ))}
-    </ItemList>
-  </div>
-);
+  return (
+    <div>
+      <PageTitle>Search for product</PageTitle>
+      <SearchForm>
+        <Title>Name of product</Title>
+        <Input search />
+        <Title>Category</Title>
+        <Input search />
+        <Row>
+          <Column>
+            {' '}
+            <Title> Price from: </Title>{' '}
+          </Column>
+          <Column>
+            {' '}
+            <Input />
+          </Column>
+          <Column>
+            <Title> to: </Title>
+          </Column>
+          <Column>
+            <Input />
+          </Column>
+        </Row>
+        <Results>{products.length} results</Results>
+      </SearchForm>
 
-Products.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-    }),
-  ),
+      <ItemList>
+        {products.map(({ id, name, image, description, price, category, quantity }) => (
+          <ItemCard
+            id={id}
+            name={name}
+            image={image}
+            description={
+              <LinesEllipsis
+                text={description}
+                maxLine="3"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
+            }
+            price={price}
+            category={category}
+            quantity={quantity}
+            key={id}
+          />
+        ))}
+      </ItemList>
+    </div>
+  );
 };
+
+// Products.propTypes = {
+//   products: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       name: PropTypes.string.isRequired,
+//       image: PropTypes.string.isRequired,
+//       price: PropTypes.number.isRequired,
+//       description: PropTypes.string.isRequired,
+//       category: PropTypes.string.isRequired,
+//       quantity: PropTypes.number.isRequired,
+//     }),
+//   ),
+// };
 
 Products.defaultProps = {
   products: [],
