@@ -65,7 +65,7 @@ const Contact = () => (
         <Little>xxx@sss.com</Little>
     </Contactinfo>
 <Contactarea>
-    <h1 >Contact</h1>
+
 <Title>Full Name</Title>
     <Input />
 

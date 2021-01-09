@@ -1,14 +1,29 @@
 import React, {Component} from "react";
-import {Link, Redirect} from "react-router-dom";
 import styled, {css} from "styled-components";
-import {routes} from "../../../Routes";
 import Heading from "../../atoms/Heading/Heading";
 import Image from "../../atoms/Image/Image";
-import ButtonIcon from "../../atoms/ButtonIcon/ButtonIcon";
 import basketIcon from "../../../assets/icons/basket.svg";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
-import Button from "../../atoms/Button/Button";
 
+
+
+const AddIcon = styled.button`
+  display: block;
+  position:relative;
+  right:20px;
+  width: 67px;
+  height: 67px;
+  border-radius: 20px;
+  background-image: url(${({ icon }) => icon});
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 50% 50%;
+  border: none;
+
+  &.active {
+    background-color: white;
+  }
+`;
 
 const StyleWrapper = styled.div`
   height: 41rem;
@@ -40,9 +55,11 @@ const InnerWrapper = styled.div`
   ${({ space }) =>
     space &&
     css`
-      display: flex;
-      flex-direction: row;
+      display:flex;
       justify-content: space-between;
+      z-index:100;
+      
+      
     `}
 `;
 const Brand = styled(Paragraph)`
@@ -55,33 +72,55 @@ const DataInfo = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.s};
 `;
-const AskButton = styled(Button)`
-  background-color: ${({ theme }) => theme.blue};
-`;
 
+
+
+
+
+const Column = styled.div`
+  display: table-cell;
+  margin: 0 auto;
+`;
+const Row = styled.div`
+  display: table;
+  width: 30%;
+  table-layout: auto;
+  border-spacing: 1px;
+`;
 
 const OldPrice = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.s};
-  text-decoration: line-through
+  text-decoration: line-through;
+   margin: 0 auto;
+  padding:0 auto;   
+  font-size:1.2rem;
+`;
+
+const NewPrice = styled(Paragraph)`
+  font-weight: ${({ theme }) => theme.bold};
+  font-size: ${({ theme }) => theme.fontSize.s};
+  font-size:2.6rem;
+  margin: 0 auto;
+  padding:0 auto;
+  
+ 
 `;
 
 class ItemCardPromotions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false,
+
         };
     }
 
-    handleItemClick = () => this.setState({ redirect: true });
+
 
     render() {
-        const { id, name, image, description, price, category } = this.props;
+        const {  name, image, description, price, newprice, category } = this.props;
 
-        if (this.state.redirect) {
-            return <Redirect to={`${routes.products}/${id}`} />;
-        }
+
 
         return (
             <StyleWrapper>
@@ -94,14 +133,18 @@ class ItemCardPromotions extends Component {
                     <Brand>{category}</Brand>
                 </InnerWrapper>
                 <InnerWrapper space>
+                    <Row>
+                        <Column>
                     <OldPrice>{price} zł</OldPrice>
-                    <AskButton blue>
-                        <Link to="/contact" style={{ textDecoration: 'none' }}>
-                            Ask a question
-                        </Link>
-                    </AskButton>
-                    <ButtonIcon icon={basketIcon} />
+                        </Column>
+                        <Column>
+                    <NewPrice>{newprice} zł</NewPrice>
+                        </Column>
+                    </Row>
+                    <AddIcon icon={basketIcon} />
+
                 </InnerWrapper>
+
             </StyleWrapper>
         );
     }
