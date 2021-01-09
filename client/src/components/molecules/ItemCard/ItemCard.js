@@ -58,6 +58,8 @@ const AskButton = styled(Button)`
   background-color: ${({ theme }) => theme.blue};
 `;
 
+
+
 class ItemCard extends Component {
   constructor(props) {
     super(props);
@@ -98,5 +100,9 @@ class ItemCard extends Component {
     );
   }
 }
+
+
+
+
 
 export default ItemCard;

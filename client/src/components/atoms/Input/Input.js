@@ -25,6 +25,17 @@ const Input = styled.input`
       background-position: 15px 50%;
       background-repeat: no-repeat;
     `}
+    
+    ${({ description }) =>
+    description &&
+    css`
+      padding: 10px 20px 10px 40px;
+      font-size: ${({ theme }) => theme.fontSize.s};
+      width: 500px;
+      height: 500px;
+      background-position: 15px 50%;
+      background-repeat: no-repeat;
+    `}
 `;
 
 export default Input;
