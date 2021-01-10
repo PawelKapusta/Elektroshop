@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 import ItemCard from '../components/molecules/ItemCard/ItemCard';
 import Input from '../components/atoms/Input/Input';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
@@ -98,27 +96,4 @@ const Products = () => {
   );
 };
 
-// Products.propTypes = {
-//   products: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//       image: PropTypes.string.isRequired,
-//       price: PropTypes.number.isRequired,
-//       description: PropTypes.string.isRequired,
-//       category: PropTypes.string.isRequired,
-//       quantity: PropTypes.number.isRequired,
-//     }),
-//   ),
-// };
-
-Products.defaultProps = {
-  products: [],
-};
-
-const mapStateToProps = (state) => {
-  const { products } = state;
-  return { products };
-};
-
-export default connect(mapStateToProps)(Products);
+export default Products;

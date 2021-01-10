@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImageCarousel from '../components/atoms/ImageSlider/ImageCarousel';
 import HomeCard from '../components/atoms/HomeCard/HomeCard';
 import Heading from '../components/atoms/Heading/Heading';
+import ProductContext from '../context/ProductContext';
 
 const CardsSection = styled.div`
   margin: auto;
@@ -30,7 +31,9 @@ const Newest = styled(Heading)`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
-const HomePage = ({ products }) => {
+const HomePage = () => {
+  const { products } = useContext(ProductContext);
+
   const productsSortedByQuantity = products.sort((a, b) => a.quantity - b.quantity).slice(0, 3);
   const productsSortedByID = products.sort((a, b) => b.id - a.id).slice(0, 3);
   return (
@@ -49,6 +52,7 @@ const HomePage = ({ products }) => {
 };
 
 HomePage.propTypes = {
+  // eslint-disable-next-line react/no-unused-prop-types
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

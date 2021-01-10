@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
-const ProductContext = createContext();
+const ProductContext = createContext({ products: [], setProducts: () => {} });
 
 export const ProductProvider = (props) => {
   const [products, setProducts] = useState([]);
