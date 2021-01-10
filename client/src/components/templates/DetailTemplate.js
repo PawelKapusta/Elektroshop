@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
 import styled from 'styled-components';
 import Heading from '../atoms/Heading/Heading';
 import Paragraph from '../atoms/Paragraph/Paragraph';
@@ -61,19 +61,5 @@ const DetailsTemplate = ({ id, name, image, description, price, category, quanti
     </Button>
   </StyledWrapper>
 );
-
-DetailsTemplate.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-
-  description: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  category: PropTypes.string,
-  quantity: PropTypes.number.isRequired,
-};
-
-DetailsTemplate.defaultProps = {
-  category: 'General',
-};
 
 export default DetailsTemplate;

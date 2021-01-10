@@ -3,7 +3,7 @@
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
-    "allowImportExportEverywhere": false,
+//   "allowImportExportEverywhere": false,
     "ecmaFeatures": {
       "globalReturn": false
     },
@@ -19,6 +19,7 @@
     "document": true
   },
   "rules": {
+    "react/jsx-uses-vars": 2,
     "react/destructuring-assignment": 0,
     "react/react-in-jsx-scope": "off",
     "no-underscore-dangle": 0,
@@ -26,6 +27,9 @@
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 1,
+    "no-unused-vars": 2,
+
+
     "react/jsx-filename-extension": [
       1,
       {

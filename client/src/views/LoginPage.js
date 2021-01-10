@@ -43,7 +43,7 @@ const BtnStyled = styled(Button)`
     background: linear-gradient(to right, #78ffd6, #007991);
   }
 `;
-const LoginPage = ({ authenticate }) => (
+const LoginPage = ({ userID, authenticate }) => (
   <AuthTemplate log={1}>
     <Formik
       initialValues={{ username: '', password: '' }}
@@ -53,7 +53,7 @@ const LoginPage = ({ authenticate }) => (
     >
       {({ handleChange, handleBlur, values }) => (
         <>
-          <Heading>Sign in</Heading>
+          <Heading>Sign in {userID}</Heading>
           <StyledForm>
             <StyledInput
               type="text"
@@ -79,9 +79,11 @@ const LoginPage = ({ authenticate }) => (
     </Formik>
   </AuthTemplate>
 );
-
+const mapStateToProps = ({ userID = null }) => ({
+  userID,
+});
 const mapDispatchToProps = (dispatch) => ({
   authenticate: (username, password) => dispatch(authenticateAction(username, password)),
 });
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
