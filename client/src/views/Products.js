@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import LinesEllipsis from 'react-lines-ellipsis';
 import ItemCard from '../components/molecules/ItemCard/ItemCard';
@@ -42,15 +42,31 @@ const Results = styled(Paragraph)`
 `;
 const Products = () => {
   const { products } = useContext(ProductContext);
+  const [searchProductName, setSearchProductName] = useState('');
+  const [searchCategory, setSearchCategory] = useState('');
+  const [searchLowerPrice, setSearchLowerPrice] = useState(0);
+  const [searchHighestPrice, setSearchHighestPrice] = useState(Number.MAX_VALUE);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchProductName.toLowerCase()) &&
+          product.category.toLowerCase().includes(searchCategory.toLowerCase()) &&
+          product.price >= searchLowerPrice &&
+          product.price <= searchHighestPrice,
+      ),
+    );
+  }, [products, searchProductName, searchCategory, searchLowerPrice, searchHighestPrice]);
   return (
     <div>
       <PageTitle>Search for product</PageTitle>
       <SearchForm>
         <Title>Name of product</Title>
-        <Input search />
+        <Input search onChange={(e) => setSearchProductName(e.target.value)} />
         <Title>Category</Title>
-        <Input search />
+        <Input search onChange={(e) => setSearchCategory(e.target.value)} />
         <Row>
           <Column>
             {' '}
@@ -58,20 +74,19 @@ const Products = () => {
           </Column>
           <Column>
             {' '}
-            <Input />
+            <Input type="number" onChange={(e) => setSearchLowerPrice(e.target.value)} />
           </Column>
           <Column>
             <Title> to: </Title>
           </Column>
           <Column>
-            <Input />
+            <Input type="number" onChange={(e) => setSearchHighestPrice(e.target.value)} />
           </Column>
         </Row>
-        <Results>{products.length} results</Results>
+        <Results>{filteredProducts.length} results</Results>
       </SearchForm>
-
       <ItemList>
-        {products.map(({ id, name, image, description, price, category, quantity }) => (
+        {filteredProducts.map(({ id, name, image, description, price, category, quantity }) => (
           <ItemCard
             id={id}
             name={name}

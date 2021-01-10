@@ -2,6 +2,7 @@ export const theme = {
   items: 'hsl(49, 100%, 58%)',
   blue: 'hsl(196, 83%, 75%)',
   green: 'hsl(106, 47%, 64%)',
+  red: 'hsl(0, 100%, 59%)',
   grey100: 'hsl(0, 0%, 96%)',
   grey200: 'hsl(0, 0%, 90%)',
   grey300: 'hsl(0, 0%, 70%)',
