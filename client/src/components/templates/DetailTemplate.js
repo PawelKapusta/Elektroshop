@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Heading from '../atoms/Heading/Heading';
 import Paragraph from '../atoms/Paragraph/Paragraph';
-import Button from '../atoms/Button/Button';
+import GoBackIcon from '../../assets/images/goBack.png';
 import { routes } from '../../Routes';
+import ButtonIcon from '../atoms/ButtonIcon/ButtonIcon';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -22,7 +23,7 @@ const StyledPageHeader = styled.div`
 `;
 
 const StyledHeading = styled(Heading)`
-  margin: 25px 0 0 0;
+  margin: 0 auto;
 
   ::first-letter {
     text-transform: uppercase;
@@ -35,30 +36,38 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const StyledImage = styled.img`
-  position: absolute;
   right: -80px;
   top: 50px;
   width: 120px;
   height: 120px;
   border-radius: 50%;
 `;
+const Column = styled.div`
+  display: table-cell;
+  width: 10%;
+`;
+const Column2 = styled.div`
+  display: table-cell;
+  width: 90%;
+`;
 
 const DetailsTemplate = ({ id, name, image, description, price, category, quantity }) => (
   <StyledWrapper>
     <StyledPageHeader>
-      <StyledHeading big as="h1">
-        {name}
-      </StyledHeading>
-      <StyledParagraph>
-        {id} {price} {category} {quantity}
-      </StyledParagraph>
-      <Paragraph>{description}</Paragraph>
+      <Column>
+        <ButtonIcon icon={GoBackIcon} as={Link} to={`${routes.products}`} back />
+      </Column>
+      <Column2>
+        <StyledImage alt={name} src={image} />
+        <StyledHeading big as="h1">
+          {name}
+        </StyledHeading>
+        <StyledParagraph>
+          {id} {price} {category} {quantity}
+        </StyledParagraph>
+        <Paragraph>{description}</Paragraph>
+      </Column2>
     </StyledPageHeader>
-    <StyledImage alt={name} src={image} />
-
-    <Button as={Link} to={`${routes.products}`}>
-      Go back
-    </Button>
   </StyledWrapper>
 );
 
