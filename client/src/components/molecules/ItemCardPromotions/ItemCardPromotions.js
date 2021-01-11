@@ -1,29 +1,13 @@
 import React, {Component} from "react";
 import styled, {css} from "styled-components";
+import {Redirect} from "react-router-dom";
 import Heading from "../../atoms/Heading/Heading";
 import Image from "../../atoms/Image/Image";
-import basketIcon from "../../../assets/icons/basket.svg";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
+import {routes} from "../../../Routes";
 
 
 
-const AddIcon = styled.button`
-  display: block;
-  position:relative;
-  right:20px;
-  width: 67px;
-  height: 67px;
-  border-radius: 20px;
-  background-image: url(${({ icon }) => icon});
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: 50% 50%;
-  border: none;
-
-  &.active {
-    background-color: white;
-  }
-`;
 
 const StyleWrapper = styled.div`
   height: 41rem;
@@ -39,7 +23,8 @@ const StyleWrapper = styled.div`
 `;
 const InnerWrapper = styled.div`
   padding: 17px 30px 10px;
-  background-color: ${({ yellow, theme }) => (yellow ? theme.items : 'white')};
+  
+  background-color: ${({ red, theme }) => (red ? theme.red : 'white')};
 
   ${({ flex }) =>
     flex &&
@@ -52,6 +37,7 @@ const InnerWrapper = styled.div`
         color: #010606;
       }
     `}
+    
   ${({ space }) =>
     space &&
     css`
@@ -107,6 +93,7 @@ const NewPrice = styled(Paragraph)`
  
 `;
 
+
 class ItemCardPromotions extends Component {
     constructor(props) {
         super(props);
@@ -115,16 +102,18 @@ class ItemCardPromotions extends Component {
         };
     }
 
-
+    handleItemClick = () => this.setState({ redirect: true });
 
     render() {
-        const {  name, image, description, price, newprice, category } = this.props;
+        const { id, name, image, description, price, newprice, category } = this.props;
 
-
+        if (this.state.redirect) {
+            return <Redirect to={`${routes.products}/${id}`} />;
+        }
 
         return (
             <StyleWrapper>
-                <InnerWrapper yellow>
+                <InnerWrapper red>
                     <Heading>{name}</Heading>
                 </InnerWrapper>
                 <InnerWrapper flex onClick={this.handleItemClick}>
@@ -141,7 +130,7 @@ class ItemCardPromotions extends Component {
                     <NewPrice>{newprice} zł</NewPrice>
                         </Column>
                     </Row>
-                    <AddIcon icon={basketIcon} />
+
 
                 </InnerWrapper>
 
