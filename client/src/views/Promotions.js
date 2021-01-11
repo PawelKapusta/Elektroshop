@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from "styled-components";
 import LinesEllipsis from "react-lines-ellipsis";
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ItemCardPromotions from "../components/molecules/ItemCardPromotions/ItemCardPromotions";
 import Heading from "../components/atoms/Heading/Heading";
-
+import ProductContext from '../context/ProductContext';
 
 const ItemList = styled.div`
   margin: 2% auto;
@@ -24,59 +22,51 @@ const PageTitle = styled(Heading)`
 
 
 
-const Promotions = ({ products }) => (
+const Promotions = () => {
+const { products } = useContext(ProductContext);
+
+
+
+
+
+    return(
     <div>
     <PageTitle>Promotions</PageTitle>
-<ItemList>
-    {products.map(({ id, name, image, description, price,newprice, category }) => (
-        <ItemCardPromotions
-            id={id}
-            name={name}
-            image={image}
-            description={
-                <LinesEllipsis
-                    text={description}
-                    maxLine="3"
-                    ellipsis="..."
-                    trimRight
-                    basedOn="letters"
+        <ItemList>
+            {products.map(({ id, name, image, description, price, category,  quantity }) => (
+                <ItemCardPromotions
+                    id={id}
+                    name={name}
+                    image={image}
+                    description={
+                        <LinesEllipsis
+                            text={description}
+                            maxLine="3"
+                            ellipsis="..."
+                            trimRight
+                            basedOn="letters"
+                        />
+                    }
+                    price={price}
+                    category={category}
+                    quantity={quantity}
+                    key={id}
                 />
-            }
-            price={price}
-            newprice={newprice}
-            category={category}
-        />
-    ))}
-</ItemList>
+            ))}
+        </ItemList>
 
     </div>
-);
-
-
-Promotions.propTypes = {
-    products: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            image: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired,
-            description: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired,
-            quantity: PropTypes.number.isRequired,
-        }),
-    ),
+    )
 };
 
-Promotions.defaultProps = {
-    products: [],
-};
 
-const mapStateToProps = (state) => {
-    const { products } = state;
-    return { products };
-};
 
-export default connect(mapStateToProps)(Promotions);
+
+
+
+
+
+export default Promotions;
 
 
 

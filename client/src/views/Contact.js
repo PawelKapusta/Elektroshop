@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
+import emailjs from 'emailjs-com';
+
 import Paragraph from "../components/atoms/Paragraph/Paragraph";
 import Input from "../components/atoms/Input/Input";
+import Button from "../components/atoms/Button/Button";
+import TextArea from "../components/atoms/TextArea/TextArea";
 
 
 
@@ -52,6 +56,19 @@ const main = styled.div`
  
 `;
 
+function sendEmail(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('gmail', 'template', e.target, 'user_ooByLRGkFNVhkAwvntQja')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    e.target.reset()
+}
+
+
 
 const Contact = () => (
 
@@ -65,14 +82,20 @@ const Contact = () => (
         <Little>xxx@sss.com</Little>
     </Contactinfo>
 <Contactarea>
+    <form className="contact-form" onSubmit={sendEmail}>
 
-<Title>Full Name</Title>
-    <Input />
 
-    <Title>Email</Title>
-    <Input />
-    <Title >Description</Title>
-    <Input description />
+        <Title>Full Name</Title>
+        <Input name="name"/>
+
+        <Title>Email</Title>
+        <Input name="email" />
+        <Title >Description</Title>
+        <TextArea description name="message" />
+        <Button style={{marginTop:"10px"}} type="submit" value="Send">Send</Button>
+
+    </form>
+
 
 </Contactarea>
     </main>
