@@ -30,6 +30,7 @@ const InnerWrapper = styled.div`
     flex &&
     css`
       display: flex;
+      justify-content: space-between;
       flex-direction: row;
       &:hover {
         transition: all 0.1s ease-in-out;
