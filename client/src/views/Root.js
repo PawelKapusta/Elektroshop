@@ -11,25 +11,28 @@ import HomePage from './HomePage';
 import DetailsPage from './DetailsPage';
 import store from '../store';
 import LoginPage from './LoginPage';
+import { ProductProvider } from '../context/ProductContext';
 
 const Root = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <>
-        <MainTemplate>
-          <Switch>
-            <Route exact path={routes.home} component={HomePage} />
-            <Route exact path={routes.products} component={Products} />
-            <Route path={routes.product} component={DetailsPage} />
-            <Route path={routes.promotions} component={Promotions} />
-            <Route path={routes.contact} component={Contact} />
-            <Route path={routes.register} component={RegisterPage} />
-            <Route path={routes.login} component={LoginPage} />
-          </Switch>
-        </MainTemplate>
-      </>
-    </BrowserRouter>
-  </Provider>
+  <ProductProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <>
+          <MainTemplate>
+            <Switch>
+              <Route exact path={routes.home} component={HomePage} />
+              <Route exact path={routes.products} component={Products} />
+              <Route path={routes.product} component={DetailsPage} />
+              <Route path={routes.promotions} component={Promotions} />
+              <Route path={routes.contact} component={Contact} />
+              <Route path={routes.register} component={RegisterPage} />
+              <Route path={routes.login} component={LoginPage} />
+            </Switch>
+          </MainTemplate>
+        </>
+      </BrowserRouter>
+    </Provider>
+  </ProductProvider>
 );
 
 export default Root;

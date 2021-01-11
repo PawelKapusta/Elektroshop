@@ -5,7 +5,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
 import ButtonIcon from '../../atoms/ButtonIcon/ButtonIcon';
-import basketIcon from '../../../assets/icons/basket.svg';
+import basketIcon from '../../../assets/images/shopping-basket.png';
 import Image from '../../atoms/Image/Image';
 import { routes } from '../../../Routes';
 
@@ -69,8 +69,6 @@ const Row = styled.div`
   border-spacing: 1px;
 `;
 
-
-
 class ItemCard extends Component {
   constructor(props) {
     super(props);
@@ -118,9 +116,5 @@ class ItemCard extends Component {
     );
   }
 }
-
-
-
-
 
 export default ItemCard;

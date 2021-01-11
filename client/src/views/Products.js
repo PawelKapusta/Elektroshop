@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ItemCard from '../components/molecules/ItemCard/ItemCard';
 import Input from '../components/atoms/Input/Input';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Heading from '../components/atoms/Heading/Heading';
+import ProductContext from '../context/ProductContext';
 
 const SearchForm = styled.div`
   margin-left: 5%;
@@ -41,78 +40,75 @@ const Results = styled(Paragraph)`
   font-size: 1.9rem;
   color: #dc143c;
 `;
-const Products = ({ products }) => (
-  <div>
-    <PageTitle>Search for product</PageTitle>
-    <SearchForm>
-      <Title>Name of product</Title>
-      <Input search />
-      <Title>Category</Title>
-      <Input search />
-      <Row>
-        <Column>
-          {' '}
-          <Title> Price from: </Title>{' '}
-        </Column>
-        <Column>
-          {' '}
-          <Input />
-        </Column>
-        <Column>
-          <Title> to: </Title>
-        </Column>
-        <Column>
-          <Input />
-        </Column>
-      </Row>
-      <Results>{products.length} results</Results>
-    </SearchForm>
-    <ItemList>
-      {products.map(({ id, name, image, description, price, category, quantity }) => (
-        <ItemCard
-          id={id}
-          name={name}
-          image={image}
-          description={
-            <LinesEllipsis
-              text={description}
-              maxLine="3"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
-          }
-          price={price}
-          category={category}
-          quantity={quantity}
-          key={id}
-        />
-      ))}
-    </ItemList>
-  </div>
-);
+const Products = () => {
+  const { products } = useContext(ProductContext);
+  const [searchProductName, setSearchProductName] = useState('');
+  const [searchCategory, setSearchCategory] = useState('');
+  const [searchLowerPrice, setSearchLowerPrice] = useState(0);
+  const [searchHighestPrice, setSearchHighestPrice] = useState(Number.MAX_VALUE);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
-Products.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-    }),
-  ),
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchProductName.toLowerCase()) &&
+          product.category.toLowerCase().includes(searchCategory.toLowerCase()) &&
+          product.price >= searchLowerPrice &&
+          product.price <= searchHighestPrice,
+      ),
+    );
+  }, [products, searchProductName, searchCategory, searchLowerPrice, searchHighestPrice]);
+  return (
+    <div>
+      <PageTitle>Search for product</PageTitle>
+      <SearchForm>
+        <Title>Name of product</Title>
+        <Input search onChange={(e) => setSearchProductName(e.target.value)} />
+        <Title>Category</Title>
+        <Input search onChange={(e) => setSearchCategory(e.target.value)} />
+        <Row>
+          <Column>
+            {' '}
+            <Title> Price from: </Title>{' '}
+          </Column>
+          <Column>
+            {' '}
+            <Input type="number" onChange={(e) => setSearchLowerPrice(e.target.value)} />
+          </Column>
+          <Column>
+            <Title> to: </Title>
+          </Column>
+          <Column>
+            <Input type="number" onChange={(e) => setSearchHighestPrice(e.target.value)} />
+          </Column>
+        </Row>
+        <Results>{filteredProducts.length} results</Results>
+      </SearchForm>
+      <ItemList>
+        {filteredProducts.map(({ id, name, image, description, price, category, quantity }) => (
+          <ItemCard
+            id={id}
+            name={name}
+            image={image}
+            description={
+              <LinesEllipsis
+                text={description}
+                maxLine="3"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
+            }
+            price={price}
+            category={category}
+            quantity={quantity}
+            key={id}
+          />
+        ))}
+      </ItemList>
+    </div>
+  );
 };
 
-Products.defaultProps = {
-  products: [],
-};
-
-const mapStateToProps = (state) => {
-  const { products } = state;
-  return { products };
-};
-
-export default connect(mapStateToProps)(Products);
+export default Products;

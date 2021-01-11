@@ -3,6 +3,7 @@ export const theme = {
   blue: 'hsl(196, 83%, 75%)',
   red: 'hsl(0,94%,52%)',
   green: 'hsl(106, 47%, 64%)',
+  red: 'hsl(0, 100%, 59%)',
   grey100: 'hsl(0, 0%, 96%)',
   grey200: 'hsl(0, 0%, 90%)',
   grey300: 'hsl(0, 0%, 70%)',
