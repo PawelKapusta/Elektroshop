@@ -5,7 +5,6 @@ import Logo2 from '../../../assets/images/Logo2.png';
 export const Foot = styled.div`
   bottom: 0;
   position: flex;
-
   left: 0;
   padding: 0px;
   width: 100%;
@@ -17,7 +16,6 @@ export const Foot = styled.div`
   font-size: 1.4rem;
   text-align: center;
   float: bottom;
-  margin: 0px;
   margin-top: 10px;
 `;
 

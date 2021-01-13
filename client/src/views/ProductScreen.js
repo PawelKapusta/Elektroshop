@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from '../Routes';
 import { detailsProduct } from '../actions/productActions';
-
 import ButtonIcon from '../components/atoms/ButtonIcon/ButtonIcon';
 import GoBackIcon from '../assets/images/goBack.png';
-
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
-
 import Heading from '../components/atoms/Heading/Heading';
 import Button from '../components/atoms/Button/Button';
+import LoadingBox from '../components/atoms/LoadingBox/LoadingBox';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -77,18 +75,14 @@ const ProductScreen = (props) => {
   const [Qty, setQty] = useState(1);
 
   const handleAddToCart = () => {
-    props.history.push(`/cart/ + ${props.match.params.id} + ?qty= + ${Qty}`);
+    props.history.push(`/cart/${props.match.params.id}?qty=${Qty}`);
   };
-  console.log('params', props.match.params.id);
+
   useEffect(() => {
     dispatch(detailsProduct(props.match.params.id));
-    return () => {
-      //
-    };
   }, []);
-  console.log(product);
   return loading ? (
-    <div>Loading...</div>
+    <LoadingBox />
   ) : error ? (
     <div>{error}</div>
   ) : (
@@ -108,7 +102,7 @@ const ProductScreen = (props) => {
       </StyledPageHeader>
       <CartDiv className="details-action">
         <ul>
-          <li>Price: {product.price}</li>
+          <li>Price: {product.price} zł</li>
           <li>Status: {product.quantity > 0 ? 'In Stock' : 'Unavailable.'}</li>
           <li>
             Quantity:{' '}
