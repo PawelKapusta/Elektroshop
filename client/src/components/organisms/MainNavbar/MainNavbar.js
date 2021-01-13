@@ -14,6 +14,7 @@ const MainNavbar = () => (
         <NavLink to="/products">Products</NavLink>
         <NavLink to="/promotions">Promotions</NavLink>
         <NavLink to="/Contact">Contact</NavLink>
+        <NavLink to="/cart/:id?">Cart</NavLink>
       </NavMenu>
       <NavBtn>
         <NavBtnLink to="/register" reg={1}>
