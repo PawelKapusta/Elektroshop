@@ -8,6 +8,7 @@ import Paragraph from '../Paragraph/Paragraph';
 
 const Card = styled.div`
   width: 300px;
+  height: 360px;
   overflow: hidden;
   box-shadow: 0px 0px 15px -5px;
   margin: 4% auto;
@@ -36,7 +37,7 @@ const Price = styled(Paragraph)`
 const HomeCard = ({ image, name, price, id }) => (
   <Link to={`${routes.products}/${id}`} style={{ textDecoration: 'none' }}>
     <Card>
-      <div className="image-container">
+      <div className="image-container" key={id}>
         <img src={image} alt="imagePhoto" />
       </div>
       <Content>

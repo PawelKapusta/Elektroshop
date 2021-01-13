@@ -4,8 +4,6 @@ import { Redirect, Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
-import ButtonIcon from '../../atoms/ButtonIcon/ButtonIcon';
-import basketIcon from '../../../assets/images/shopping-basket.png';
 import Image from '../../atoms/Image/Image';
 import { routes } from '../../../Routes';
 
@@ -50,6 +48,10 @@ const Brand = styled(Paragraph)`
   margin: 0 1%;
   font-size: 3rem;
   font-weight: 600;
+`;
+const PriceText = styled(Paragraph)`
+  font-weight: ${({ theme }) => theme.bold};
+  font-size: ${({ theme }) => theme.fontSize.s};
 `;
 const DataInfo = styled(Paragraph)`
   margin: 50px 0 10px 30px;
@@ -104,13 +106,13 @@ class ItemCard extends Component {
           <Brand>{category}</Brand>
         </InnerWrapper>
         <InnerWrapper space>
-          <Paragraph>{price} zł</Paragraph>
+          <PriceText>{price} zł</PriceText>
+
           <AskButton blue>
             <Link to="/contact" style={{ textDecoration: 'none' }}>
               Ask a question
             </Link>
           </AskButton>
-          <ButtonIcon icon={basketIcon} />
         </InnerWrapper>
       </StyleWrapper>
     );

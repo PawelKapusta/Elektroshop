@@ -21,7 +21,22 @@ connection.connect(function (error) {
     console.log("Database connected");
   }
 });
-
+app.get("/getAllProducts/:id", (request, response) => {
+  //Pobieranie danych dostępnych w bazie
+  const productId = request.params.id;
+  connection.query(
+    `SELECT * FROM products WHERE id = ${productId};`,
+    function (error, rows, fields) {
+      if (!!error) {
+        console.log("Error in the query");
+      } else {
+        console.log("Database read");
+        response.send(rows);
+        console.log(rows);
+      }
+    }
+  );
+});
 app.get("/getAllProducts", (request, response) => {
   //Pobieranie danych dostępnych w bazie
   connection.query(
@@ -40,11 +55,11 @@ app.get("/getAllProducts", (request, response) => {
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-
+const port = process.env.PORT || 3001;
 app.get("/", (req, res) => {
-  res.send("Henlo");
+  res.send("Hello");
 });
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log("Running on port 3001");
 });

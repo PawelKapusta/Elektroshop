@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import ButtonIcon from '../atoms/ButtonIcon/ButtonIcon';
-import Heading from '../atoms/Heading/Heading';
-import Paragraph from '../atoms/Paragraph/Paragraph';
-import GoBackIcon from '../../assets/images/goBack.png';
-import { routes } from '../../Routes';
-import Button from '../atoms/Button/Button';
-import '../../css/productDetails.css';
+import { routes } from '../Routes';
+import { detailsProduct } from '../actions/productActions';
+
+import ButtonIcon from '../components/atoms/ButtonIcon/ButtonIcon';
+import GoBackIcon from '../assets/images/goBack.png';
+
+import Paragraph from '../components/atoms/Paragraph/Paragraph';
+
+import Heading from '../components/atoms/Heading/Heading';
+import Button from '../components/atoms/Button/Button';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -38,11 +42,8 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const StyledImage = styled.img`
-  right: -80px;
-  top: 50px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
 `;
 const Column = styled.div`
   display: table-cell;
@@ -69,34 +70,46 @@ const BtnStyled = styled(Button)`
     background: linear-gradient(to right, #e1f5c4, #ede574);
   }
 `;
-const DetailsTemplate = ({ id, name, image, description, price, category, quantity }) => {
+const ProductScreen = (props) => {
+  const productDetails = useSelector((state) => state.productDetails);
+  const { product, loading, error } = productDetails;
+  const dispatch = useDispatch();
   const [Qty, setQty] = useState(1);
-  const history = useHistory();
-  console.log(id);
+
   const handleAddToCart = () => {
-    history.push(`/cart/ + ${id} + ?qty= + ${Qty}`, { from: `ProductDetails id: + ${id}}` });
+    props.history.push(`/cart/ + ${props.match.params.id} + ?qty= + ${Qty}`);
   };
-  return (
+  console.log('params', props.match.params.id);
+  useEffect(() => {
+    dispatch(detailsProduct(props.match.params.id));
+    return () => {
+      //
+    };
+  }, []);
+  console.log(product);
+  return loading ? (
+    <div>Loading...</div>
+  ) : error ? (
+    <div>{error}</div>
+  ) : (
     <StyledWrapper>
       <StyledPageHeader>
         <Column>
           <ButtonIcon icon={GoBackIcon} as={Link} to={`${routes.products}`} back={1} />
         </Column>
         <Column2>
-          <StyledImage alt={name} src={image} />
+          <StyledImage alt="name" src={product.image} />
           <StyledHeading big as="h1">
-            {name}
+            {product.name}
           </StyledHeading>
-          <StyledParagraph>
-            {id} {category} {quantity}
-          </StyledParagraph>
-          <Paragraph>{description}</Paragraph>
+          <StyledParagraph>Category: {product.category}</StyledParagraph>
+          <Paragraph>{product.description}</Paragraph>
         </Column2>
       </StyledPageHeader>
       <CartDiv className="details-action">
         <ul>
-          <li>Price: {price}</li>
-          <li>Status: {quantity > 0 ? 'In Stock' : 'Unavailable.'}</li>
+          <li>Price: {product.price}</li>
+          <li>Status: {product.quantity > 0 ? 'In Stock' : 'Unavailable.'}</li>
           <li>
             Quantity:{' '}
             <select
@@ -105,7 +118,7 @@ const DetailsTemplate = ({ id, name, image, description, price, category, quanti
                 setQty(parseInt(e.target.value, 10));
               }}
             >
-              {[...Array(quantity).keys()].map((x) => (
+              {[...Array(product.quantity).keys()].map((x) => (
                 <option key={x + 1} value={x + 1}>
                   {x + 1}
                 </option>
@@ -113,11 +126,13 @@ const DetailsTemplate = ({ id, name, image, description, price, category, quanti
             </select>
             {console.log(Qty)}
           </li>
-          <li>{quantity > 0 && <BtnStyled onClick={handleAddToCart}>Add to Cart</BtnStyled>}</li>
+          <li>
+            {product.quantity > 0 && <BtnStyled onClick={handleAddToCart}>Add to Cart</BtnStyled>}
+          </li>
         </ul>
       </CartDiv>
     </StyledWrapper>
   );
 };
 
-export default DetailsTemplate;
+export default ProductScreen;

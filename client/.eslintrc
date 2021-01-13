@@ -1,9 +1,13 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
-//   "allowImportExportEverywhere": false,
+    "allowImportExportEverywhere": false,
     "ecmaFeatures": {
       "globalReturn": false
     },
@@ -19,6 +23,7 @@
     "document": true
   },
   "rules": {
+    "no-nested-ternary": 1,
     "react/jsx-uses-vars": 2,
     "react/destructuring-assignment": 0,
     "react/react-in-jsx-scope": "off",
@@ -27,21 +32,28 @@
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 1,
-    "no-unused-vars": 2,
-
-
+    "no-unused-vars": 1,
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js"]
+        "extensions": [
+          ".js"
+        ]
       }
     ]
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["./src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "paths": [
+          "./src"
+        ],
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
       }
     }
   }
