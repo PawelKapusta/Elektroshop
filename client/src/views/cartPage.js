@@ -6,10 +6,11 @@ import '../css/Main.css';
 import MessageBox from '../components/atoms/MessageBox/MessageBox';
 
 function CartPage(props) {
-  const productId = props.match.params.id;
+  const productId = Number(props.match.params.id);
   const qty = props.location.search ? Number(props.location.search.split('=')[1]) : 1;
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (productId) {

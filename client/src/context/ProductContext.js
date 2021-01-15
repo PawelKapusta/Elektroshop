@@ -8,7 +8,7 @@ export const ProductProvider = (props) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const { data } = await axios.get('http://localhost:3001/getAllProducts');
+      const { data } = await axios.get('http://localhost:5000/api/products');
       setProducts(data);
     };
     getProducts();
