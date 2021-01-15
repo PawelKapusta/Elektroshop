@@ -1,21 +1,14 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AuthTemplate from '../components/templates/AuthTemplate';
-import Heading from '../components/atoms/Heading/Heading';
 import Button from '../components/atoms/Button/Button';
-import { routes } from '../Routes';
 import Input from '../components/atoms/Input/Input';
-import { authenticate as authenticateAction } from '../actions/index';
-
-const StyledForm = styled(Form)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
+import '../css/signin.css';
+import { signin } from '../actions/userActions';
+import LoadingBox from '../components/atoms/LoadingBox/LoadingBox';
+import MessageBox from '../components/atoms/MessageBox/MessageBox';
 
 const StyledInput = styled(Input)`
   margin: 0 0 30px 0;
@@ -43,47 +36,69 @@ const BtnStyled = styled(Button)`
     background: linear-gradient(to right, #78ffd6, #007991);
   }
 `;
-const LoginPage = ({ userID, authenticate }) => (
-  <AuthTemplate log={1}>
-    <Formik
-      initialValues={{ username: '', password: '' }}
-      onSubmit={({ username, password }) => {
-        authenticate(username, password);
-      }}
-    >
-      {({ handleChange, handleBlur, values }) => (
-        <>
-          <Heading>Sign in {userID}</Heading>
-          <StyledForm>
-            <StyledInput
-              type="text"
-              name="username"
-              placeholder="Login"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.title}
-            />
-            <StyledInput
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.title}
-            />
-            <BtnStyled type="submit">sign in</BtnStyled>
-          </StyledForm>
-          <StyledLink to={routes.register}>I want my account!</StyledLink>
-        </>
-      )}
-    </Formik>
-  </AuthTemplate>
-);
-const mapStateToProps = ({ userID = null }) => ({
-  userID,
-});
-const mapDispatchToProps = (dispatch) => ({
-  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
-});
+const LoginPage = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = userSignin;
+
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+  };
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [props.history, redirect, userInfo]);
+  return (
+    <AuthTemplate log={1}>
+      <form className="form" onSubmit={submitHandler}>
+        <div className="Title">
+          <h1>Sign In</h1>
+        </div>
+        {loading && <LoadingBox />}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <div>
+          <label htmlFor="email">Email address</label>
+          <StyledInput
+            type="email"
+            id="email"
+            placeholder="Enter email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <StyledInput
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="Btn">
+          <BtnStyled type="submit">Sign In</BtnStyled>
+        </div>
+        <div>
+          <div>
+            New customer? <StyledLink to="/register">Create your account</StyledLink>
+          </div>
+        </div>
+      </form>
+    </AuthTemplate>
+  );
+};
+// const mapStateToProps = ({ userID = null }) => ({
+//   userID,
+// });
+// const mapDispatchToProps = (dispatch) => ({
+//   authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+// });
+
+export default LoginPage;

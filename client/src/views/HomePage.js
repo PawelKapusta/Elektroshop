@@ -33,7 +33,7 @@ const Newest = styled(Heading)`
 `;
 const HomePage = () => {
   const { products } = useContext(ProductContext);
-
+  console.log('prod', products);
   const productsSortedByQuantity = products.sort((a, b) => a.quantity - b.quantity).slice(0, 3);
   const productsSortedByID = products.sort((a, b) => b.id - a.id).slice(0, 3);
   return (

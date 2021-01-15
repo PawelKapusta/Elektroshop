@@ -8,8 +8,7 @@ const productRouter = express.Router();
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
-    res.send(products);
+    res.send(data.products);
   })
 );
 
@@ -24,7 +23,7 @@ productRouter.get(
 productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = data.products.find((x) => x.id === req.params.id);
     if (product) {
       res.send(product);
     } else {

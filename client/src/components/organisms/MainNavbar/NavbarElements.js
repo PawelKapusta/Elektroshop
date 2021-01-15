@@ -30,7 +30,9 @@ export const NavLink = styled(Link)`
     :first-of-type {
       color: #98fb98;
     }
-    color: #15cdfc;
+    :last-of-type {
+      color: #000000;
+    }
   }
 `;
 
@@ -55,12 +57,38 @@ export const NavMenu = styled.div`
     display: none;
   }
 `;
-
+export const DropDown = styled.div`
+  color: #2020a0;
+  position: relative;
+  display: inline-block;
+  &:hover {
+    color: white;
+    display: block;
+  }
+`;
+export const List = styled.ul`
+  position: absolute;
+  display: none;
+  min-width: 6rem;
+  padding: 1rem;
+  z-index: 1;
+  background-color: #203040;
+  margin-top: 0.5rem;
+  margin-left: 0.2rem;
+  border-radius: 0.5rem;
+  &:hover {
+    display: block;
+  }
+`;
+export const ListElement = styled.li`
+  z-index: 2;
+  text-decoration: none;
+  color: #e0e0ff;
+`;
 export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
-  margin-right: 4px;
-
+  margin-left: 20px;
   @media screen and (max-width: 768px) {
     display: none;
   }
