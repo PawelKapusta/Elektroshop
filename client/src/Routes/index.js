@@ -4,7 +4,7 @@ export const routes = {
   product: '/products/:id',
   promotions: '/promotions',
   contact: '/contact',
-  login: '/login',
+  login: '/signin',
   register: '/register',
   cart: '/cart/:id?',
 };

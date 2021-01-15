@@ -22,9 +22,9 @@ function CartPage(props) {
     dispatch(removeFromCart(id));
   };
 
-  // const checkoutHandler = () => {
-  //   props.history.push('/signin?redirect=shipping');
-  // };
+  const checkoutHandler = () => {
+    props.history.push('/signin?redirect=shipping');
+  };
   return (
     <div className="row top">
       <div className="col-2">
@@ -78,7 +78,12 @@ function CartPage(props) {
               </h2>
             </li>
             <li>
-              <button type="button" className="primary block" disabled={cartItems.length === 0}>
+              <button
+                type="button"
+                className="primary block"
+                onClick={checkoutHandler}
+                disabled={cartItems.length === 0}
+              >
                 Proceed to Checkout
               </button>
             </li>

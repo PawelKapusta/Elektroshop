@@ -1,14 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import MainTemplate from '../components/templates/MainTemplate';
-
 import Promotions from './Promotions';
 import Contact from './Contact';
 import { routes } from '../Routes';
 import RegisterPage from './RegisterPage';
 import HomePage from './HomePage';
-
 import LoginPage from './LoginPage';
 import { ProductProvider } from '../context/ProductContext';
 import ProductScreen from './ProductScreen';
