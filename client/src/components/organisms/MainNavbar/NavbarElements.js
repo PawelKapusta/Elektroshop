@@ -57,33 +57,8 @@ export const NavMenu = styled.div`
     display: none;
   }
 `;
-export const DropDown = styled.div`
-  color: #2020a0;
-  position: relative;
-  display: inline-block;
-  &:hover {
-    color: white;
-    display: block;
-  }
-`;
-export const List = styled.ul`
-  position: absolute;
-  display: none;
-  min-width: 6rem;
-  padding: 1rem;
-  z-index: 1;
-  background-color: #203040;
-  margin-top: 0.5rem;
-  margin-left: 0.2rem;
-  border-radius: 0.5rem;
-  &:hover {
-    display: block;
-  }
-`;
-export const ListElement = styled.li`
-  z-index: 2;
-  text-decoration: none;
-  color: #e0e0ff;
+export const listDiv = styled.div`
+  margin-top: 3%;
 `;
 export const NavBtn = styled.nav`
   display: flex;

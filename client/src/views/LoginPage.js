@@ -63,7 +63,8 @@ const LoginPage = (props) => {
         {loading && <LoadingBox />}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Email address</label>
+          {/* eslint-disable */}
+          <label> Email address</label>
           <StyledInput
             type="email"
             id="email"
@@ -73,7 +74,7 @@ const LoginPage = (props) => {
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label>Password</label>
           <StyledInput
             type="password"
             id="password"
@@ -82,12 +83,14 @@ const LoginPage = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {/* eslint-disable */}
         <div className="Btn">
           <BtnStyled type="submit">Sign In</BtnStyled>
         </div>
         <div>
           <div>
-            New customer? <StyledLink to="/register">Create your account</StyledLink>
+            New customer?{' '}
+            <StyledLink to={`/register?redirect=${redirect}`}>Create your account</StyledLink>
           </div>
         </div>
       </form>

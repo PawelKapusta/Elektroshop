@@ -4,9 +4,6 @@ import Logo2 from '../../../assets/images/Logo2.png';
 
 export const Foot = styled.div`
   bottom: 0;
-  position: flex;
-  left: 0;
-  padding: 0px;
   width: 100%;
   height: 100px;
   background: #f2709c;

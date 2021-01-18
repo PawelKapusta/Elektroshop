@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import data from "./data.js";
 import userRouter from "./routers/userRouter";
 import productRouter from "./routers/productRouter";
+import "./routers/orderRouter";
 import cors from "cors";
+import orderRouter from "./routers/orderRouter";
 
 const app = express();
 dotenv.config();
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/elektroshop", {
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });

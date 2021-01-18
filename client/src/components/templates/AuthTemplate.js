@@ -11,12 +11,12 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 7%;
+  padding-top: 1%;
 `;
 
 const StyledAuthCard = styled.div`
-  width: 500px;
-  height: 500px;
+  width: 55vh;
+  height: 75vh;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);

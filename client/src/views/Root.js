@@ -11,6 +11,12 @@ import { ProductProvider } from '../context/ProductContext';
 import ProductScreen from './ProductScreen';
 import ProductsScreen from './ProductsScreen';
 import CartPage from './cartPage';
+import ShippingAddress from './ShippingAddress';
+import PaymentMethodScreen from './PaymentPage';
+import PlaceOrder from './PlaceOrder';
+import Order from './Order';
+import OrderHistory from './OrderHistory';
+import '../css/index.css';
 
 const Root = () => (
   <ProductProvider>
@@ -25,7 +31,12 @@ const Root = () => (
             <Route path={routes.contact} component={Contact} />
             <Route path={routes.register} component={RegisterPage} />
             <Route path={routes.login} component={LoginPage} />
+            <Route path={routes.shipping} component={ShippingAddress} />
             <Route path={routes.cart} component={CartPage} />
+            <Route path={routes.payment} component={PaymentMethodScreen} />
+            <Route path={routes.placeOrder} component={PlaceOrder} />
+            <Route path={routes.order} component={Order} />
+            <Route path={routes.orderHistory} component={OrderHistory} />
           </Switch>
         </MainTemplate>
       </>
