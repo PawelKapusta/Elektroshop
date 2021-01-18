@@ -7,4 +7,9 @@ export const routes = {
   login: '/signin',
   register: '/register',
   cart: '/cart/:id?',
+  shipping: '/shipping',
+  payment: '/payment',
+  placeOrder: '/placeorder',
+  order: '/order/:id',
+  orderHistory: '/orderhistory',
 };
