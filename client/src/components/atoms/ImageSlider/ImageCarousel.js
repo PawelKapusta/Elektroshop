@@ -39,6 +39,7 @@ const RightArrow = styled(FaArrowAltCircleRight)`
 
 const Popular = styled(Heading)`
   margin-top: 2%;
+  margin-bottom: 4%;
   text-align: center;
   text-transform: uppercase;
   font-size: 45px;

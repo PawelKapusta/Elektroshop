@@ -10,7 +10,6 @@ export default function Order(props) {
   const orderId = props.match.params.id;
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
-  // const [sdkReady, setSdkReady] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsOrder(orderId));

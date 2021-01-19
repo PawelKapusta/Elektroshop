@@ -57,8 +57,13 @@ export const NavMenu = styled.div`
     display: none;
   }
 `;
-export const listDiv = styled.div`
+export const ListDiv = styled.div`
+  margin-top: 1%;
+  margin-right: 5%;
+`;
+export const AdminDiv = styled.div`
   margin-top: 3%;
+  margin-left: 3%;
 `;
 export const NavBtn = styled.nav`
   display: flex;
@@ -83,6 +88,7 @@ export const NavBtnLink = styled(Link)`
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-left: 17px;
+  margin-top: 13%;
   &:hover {
     transition: all 0.2s ease-in-out;
     background: #fff;

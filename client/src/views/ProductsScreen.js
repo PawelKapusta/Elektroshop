@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import LinesEllipsis from 'react-lines-ellipsis';
 import styled from 'styled-components';
-
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../components/atoms/Input/Input';
 import ItemCard from '../components/molecules/ItemCard/ItemCard';
-
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Heading from '../components/atoms/Heading/Heading';
 import { listProducts } from '../actions/productActions';

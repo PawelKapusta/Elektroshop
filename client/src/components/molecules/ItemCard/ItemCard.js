@@ -8,7 +8,7 @@ import Image from '../../atoms/Image/Image';
 import { routes } from '../../../Routes';
 
 const StyleWrapper = styled.div`
-  height: 41rem;
+  height: 42rem;
   width: 90rem;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   border-radius: 10px;
@@ -35,7 +35,6 @@ const InnerWrapper = styled.div`
         color: #010606;
       }
     `}
-
   ${({ space }) =>
     space &&
     css`
@@ -107,12 +106,9 @@ class ItemCard extends Component {
         </InnerWrapper>
         <InnerWrapper space>
           <PriceText>{price} zł</PriceText>
-
-          <AskButton blue>
-            <Link to="/contact" style={{ textDecoration: 'none' }}>
-              Ask a question
-            </Link>
-          </AskButton>
+          <Link to="/contact" style={{ textDecoration: 'none' }}>
+            <AskButton blue>Ask a question</AskButton>
+          </Link>
         </InnerWrapper>
       </StyleWrapper>
     );

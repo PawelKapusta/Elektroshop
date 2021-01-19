@@ -16,6 +16,9 @@ import PaymentMethodScreen from './PaymentPage';
 import PlaceOrder from './PlaceOrder';
 import Order from './Order';
 import OrderHistory from './OrderHistory';
+import Profile from './ProfilePage';
+import AdminProductList from './AdminProductList';
+import ProductEdit from './ProductEdit';
 import '../css/index.css';
 
 const Root = () => (
@@ -26,7 +29,7 @@ const Root = () => (
           <Switch>
             <Route exact path={routes.home} component={HomePage} />
             <Route exact path={routes.products} component={ProductsScreen} />
-            <Route path={routes.product} component={ProductScreen} />
+            <Route exact path={routes.product} component={ProductScreen} />
             <Route path={routes.promotions} component={Promotions} />
             <Route path={routes.contact} component={Contact} />
             <Route path={routes.register} component={RegisterPage} />
@@ -37,6 +40,9 @@ const Root = () => (
             <Route path={routes.placeOrder} component={PlaceOrder} />
             <Route path={routes.order} component={Order} />
             <Route path={routes.orderHistory} component={OrderHistory} />
+            <Route path={routes.profile} component={Profile} />
+            <Route path={routes.adminProducts} component={AdminProductList} />
+            <Route path={routes.editProduct} component={ProductEdit} exact />
           </Switch>
         </MainTemplate>
       </>
