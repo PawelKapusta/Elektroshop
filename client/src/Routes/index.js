@@ -12,4 +12,7 @@ export const routes = {
   placeOrder: '/placeorder',
   order: '/order/:id',
   orderHistory: '/orderhistory',
+  profile: '/profile',
+  adminProducts: '/productlist',
+  editProduct: '/products/:id/edit',
 };

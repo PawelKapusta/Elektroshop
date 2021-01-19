@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,8 +12,23 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import RestoreIcon from '@material-ui/icons/Restore';
+import PersonIcon from '@material-ui/icons/Person';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import { signout } from '../../../actions/userActions';
-import { Nav, NavMenu, NavBtn, NavBtnLink, NavLink, Bars, listDiv } from './NavbarElements';
+import {
+  Nav,
+  NavMenu,
+  NavBtn,
+  NavBtnLink,
+  NavLink,
+  Bars,
+  ListDiv,
+  AdminDiv,
+} from './NavbarElements';
 import Logo from '../../../assets/images/Logo.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +53,8 @@ const MainNavbar = () => {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openAdmin, setOpenAdmin] = useState(false);
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
@@ -46,7 +62,9 @@ const MainNavbar = () => {
   const handleClick = () => {
     setOpen(!open);
   };
-
+  const handleAdminPanel = () => {
+    setOpenAdmin(!openAdmin);
+  };
   return (
     <>
       <Nav>
@@ -62,57 +80,104 @@ const MainNavbar = () => {
           <NavLink to="/cart/:id?">
             Cart {cartItems.length > 0 && <span className="badge">{cartItems.length}</span>}
           </NavLink>
-          <listDiv>
-            {userInfo ? (
-              <List
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-                className={classes.root}
-              >
-                <ListItem button onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={userInfo.name}
-                    classes={{ primary: classes.listItemText }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
+        </NavMenu>{' '}
+        <ListDiv>
+          {userInfo ? (
+            <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root}>
+              <ListItem button onClick={handleClick}>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary={userInfo.name} classes={{ primary: classes.listItemText }} />
+                {open ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <Link to="/profile">
+                    <ListItem button className={classes.nested}>
+                      <ListItemIcon>
+                        <PersonIcon />
+                      </ListItemIcon>{' '}
+                      <ListItemText primary="Profile" classes={{ primary: classes.listItemText }} />
+                    </ListItem>
+                  </Link>
+                  <Link to="/orderhistory">
                     <ListItem button className={classes.nested}>
                       <ListItemIcon>
                         <RestoreIcon />
                       </ListItemIcon>{' '}
-                      <Link to="/orderhistory">
-                        <ListItemText
-                          primary="Order history"
-                          classes={{ primary: classes.listItemText }}
-                        />
-                      </Link>
+                      <ListItemText
+                        primary="Order history"
+                        classes={{ primary: classes.listItemText }}
+                      />
                     </ListItem>
+                  </Link>
+                  <Link to="/signin">
                     <ListItem button className={classes.nested} onClick={signoutHandler}>
                       <ListItemIcon>
                         <ExitToAppIcon />
                       </ListItemIcon>{' '}
-                      <Link to="/">
-                        <ListItemText
-                          primary="Sign Out"
-                          classes={{ primary: classes.listItemText }}
-                        />
-                      </Link>
+                      <ListItemText
+                        primary="Sign Out"
+                        classes={{ primary: classes.listItemText }}
+                      />
                     </ListItem>
-                  </List>
-                </Collapse>
-              </List>
-            ) : (
-              <NavBtn>
-                <NavBtnLink to="/signin">Sign in</NavBtnLink>
-              </NavBtn>
-            )}
-          </listDiv>
-        </NavMenu>
+                  </Link>
+                </List>
+              </Collapse>
+            </List>
+          ) : (
+            <NavBtn>
+              <NavBtnLink to="/signin">Sign in</NavBtnLink>
+            </NavBtn>
+          )}
+        </ListDiv>
+        <AdminDiv>
+          {/* eslint-disable */}
+          {userInfo && userInfo.isAdmin && (
+            <PopupState variant="popover" popupId="demo-popup-menu">
+              {(popupState) => (
+                <Fragment>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    {...bindTrigger(popupState)}
+                    style={{ paddingRight: '30px', fontSize: '15px', whiteSpace: 'nowrap' }}
+                  >
+                    {'Admin Panel'}
+                  </Button>
+                  <Menu {...bindMenu(popupState)}>
+                    <MenuItem
+                      onClick={popupState.close}
+                      style={{ paddingRight: '50px', fontSize: '15px' }}
+                    >
+                      <Link to="/dashboard">Dashboard</Link>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={popupState.close}
+                      style={{ paddingRight: '50px', fontSize: '15px' }}
+                    >
+                      <Link to="/productlist">Products</Link>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={popupState.close}
+                      style={{ paddingRight: '50px', fontSize: '15px' }}
+                    >
+                      <Link to="/orderlist">Orders</Link>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={popupState.close}
+                      style={{ paddingRight: '50px', fontSize: '15px' }}
+                    >
+                      <Link to="/userlist">Users</Link>
+                    </MenuItem>
+                  </Menu>
+                </Fragment>
+              )}
+            </PopupState>
+          )}
+          {/* eslint-disable */}
+        </AdminDiv>
       </Nav>
     </>
   );

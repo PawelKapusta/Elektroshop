@@ -8,11 +8,10 @@ import Paragraph from '../Paragraph/Paragraph';
 
 const Card = styled.div`
   width: 300px;
-  height: 360px;
+  height: 380px;
   overflow: hidden;
   box-shadow: 0px 0px 15px -5px;
-  margin: 4% auto;
-  padding: 0 0 4% 0;
+  margin: 6% auto;
   &:hover {
     transform: scale(1.1);
     transition: 0.4s ease-in-out;
@@ -22,16 +21,16 @@ const Card = styled.div`
 const Content = styled.div`
   position: relative;
   margin: 2%;
-  padding: 5%;
+  padding: 2%;
 `;
 const Name = styled(Heading)`
-  margin: 1% auto;
+  margin: 2% auto;
   text-decoration: none;
 `;
 const Price = styled(Paragraph)`
   position: absolute;
   right: 0;
-  bottom: -27px;
+  bottom: -25px;
   margin: 2% 2%;
 `;
 const HomeCard = ({ image, name, price, id }) => (

@@ -13,7 +13,6 @@ export const Foot = styled.div`
   font-size: 1.4rem;
   text-align: center;
   float: bottom;
-  margin-top: 10px;
 `;
 
 export const Footimg = styled.div`

@@ -22,7 +22,7 @@ const Row = styled.div`
   border-spacing: 10px;
 `;
 const Newest = styled(Heading)`
-  margin-top: 2%;
+  margin-top: 4%;
   text-align: center;
   text-transform: uppercase;
   font-size: 45px;
