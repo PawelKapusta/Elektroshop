@@ -6,6 +6,7 @@ import productRouter from "./routers/productRouter";
 import "./routers/orderRouter";
 import cors from "cors";
 import orderRouter from "./routers/orderRouter";
+import path from "path";
 
 const app = express();
 dotenv.config();
@@ -30,7 +31,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });

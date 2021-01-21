@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "cd client && npm install && npm run build",
     "start": "nodemon --watch server --exec node --experimental-modules --es-module-specifier-resolution=node server/index.js",
     "serve": "nodemon server/index.js"
   },
@@ -22,5 +23,9 @@
     "mongoose": "^5.11.8",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "14.14.0",
+    "npm": "6.14.8"
   }
 }

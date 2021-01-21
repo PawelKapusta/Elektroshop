@@ -15,4 +15,5 @@ export const routes = {
   profile: '/profile',
   adminProducts: '/productlist',
   editProduct: '/products/:id/edit',
+  adminOrder: '/orderList',
 };
