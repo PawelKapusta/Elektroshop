@@ -2,18 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { detailsOrder } from '../actions/orderActions';
+import { deliverOrder, detailsOrder } from '../actions/orderActions';
 import MessageBox from '../components/atoms/MessageBox/MessageBox';
 import LoadingBox from '../components/atoms/LoadingBox/LoadingBox';
+import { ORDER_DELIVER_RESET } from '../constants/orderConstants';
 
 export default function Order(props) {
   const orderId = props.match.params.id;
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   const dispatch = useDispatch();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, error: errorDeliver, success: successDeliver } = orderDeliver;
   useEffect(() => {
-    dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+    if (!order || successDeliver || (order && order._id !== orderId)) {
+      dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch(detailsOrder(orderId));
+    }
+  }, [dispatch, orderId, successDeliver]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order._id));
+  };
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -113,7 +125,19 @@ export default function Order(props) {
                 </div>
               </li>
               <li>
-                <PayPalButton amount={order.totalPrice} />
+                {!userInfo.isAdmin ? (
+                  <PayPalButton amount={order.totalPrice} />
+                ) : (
+                  !order.isDelivered && (
+                    <li>
+                      {loadingDeliver && <LoadingBox />}
+                      {errorDeliver && <MessageBox variant="danger">{errorDeliver}</MessageBox>}
+                      <button type="button" className="primary block" onClick={deliverHandler}>
+                        Deliver Order
+                      </button>
+                    </li>
+                  )
+                )}
               </li>
             </ul>
           </div>

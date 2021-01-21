@@ -15,7 +15,10 @@ import {
 } from '../reducers/userReducer';
 import {
   orderCreateReducer,
+  orderDeleteReducer,
+  orderDeliverReducer,
   orderDetailsReducer,
+  orderListReducer,
   orderMineListReducer,
 } from '../reducers/orderReducers';
 
@@ -48,6 +51,9 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   productCreate: productCreateReducer,
   productUpdate: productUpdateReducer,
+  orderList: orderListReducer,
+  orderDelete: orderDeleteReducer,
+  orderDeliver: orderDeliverReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)));

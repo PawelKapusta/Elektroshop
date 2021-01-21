@@ -19,6 +19,7 @@ import OrderHistory from './OrderHistory';
 import Profile from './ProfilePage';
 import AdminProductList from './AdminProductList';
 import ProductEdit from './ProductEdit';
+import OrderList from './AdminOrdersList';
 import '../css/index.css';
 
 const Root = () => (
@@ -43,6 +44,7 @@ const Root = () => (
             <Route path={routes.profile} component={Profile} />
             <Route path={routes.adminProducts} component={AdminProductList} />
             <Route path={routes.editProduct} component={ProductEdit} exact />
+            <Route path={routes.adminOrder} component={OrderList} />
           </Switch>
         </MainTemplate>
       </>
