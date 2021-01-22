@@ -17,7 +17,6 @@ const data = {
   ],
   products: [
     {
-      id: "1",
       name: "Laptop Acer Nitro 5 AN515-44 (NH.Q9GEP.00C)",
       category: "Computer",
       image:
@@ -67,7 +66,6 @@ const data = {
         "Waga[kg]: 2.2\n",
     },
     {
-      id: "2",
       name: "Laptop Acer Swift 5 SF514-55T (NX.A35EP.001)\n",
       category: "Computer",
       image:
@@ -118,7 +116,6 @@ const data = {
         "Waga[kg]: 1.06\n",
     },
     {
-      id: "3",
       name: "Dysk SSD Lexar NM610 500 GB M.2 2280 PCI-E x4 Gen3 NVMe",
       category: "Disc",
       image:
@@ -141,7 +138,6 @@ const data = {
         "TBW (Total Bytes Written): 250 TB\n",
     },
     {
-      id: "4",
       name: "Pamięć Corsair Vengeance RGB PRO, DDR4, 16 GB, 3200MHz, CL16",
       category: "RAM Memory",
       image:
@@ -160,7 +156,6 @@ const data = {
         "Napięcie[V]: 1.35\n",
     },
     {
-      id: "5",
       name: "Procesor AMD Ryzen 5 3600",
       category: "Processor",
       image:
@@ -183,7 +178,6 @@ const data = {
         "Pamięć podręczna: 32 MB\n",
     },
     {
-      id: "6",
       name: "Mikrofon SPC Gear SM900T USB (SPG055)\n",
       category: "Microphone",
       image:

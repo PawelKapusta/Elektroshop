@@ -25,7 +25,7 @@ const ProductEdit = (props) => {
     if (successUpdate) {
       props.history.push('/productlist');
     }
-    if (!product || product.id !== productId || successUpdate) {
+    if (!product || product._id !== productId || successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
@@ -42,7 +42,7 @@ const ProductEdit = (props) => {
     // TODO: dispatch update product
     dispatch(
       updateProduct({
-        id: productId,
+        _id: productId,
         name,
         price,
         image,

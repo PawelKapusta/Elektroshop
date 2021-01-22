@@ -10,15 +10,19 @@ import path from "path";
 
 const app = express();
 dotenv.config();
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/elektroshop", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+
+mongoose.connect(
+  "mongodb+srv://Admin:admin@cluster0.5ad7r.mongodb.net/<dbname>?retryWrites=true&w=majority" ||
+    "mongodb://localhost/elektroshop",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  }
+);
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);

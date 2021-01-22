@@ -21,6 +21,8 @@ import AdminProductList from './AdminProductList';
 import ProductEdit from './ProductEdit';
 import OrderList from './AdminOrdersList';
 import '../css/index.css';
+import UserList from './AdminUserList';
+import UserEdit from './AdminEditUser';
 
 const Root = () => (
   <ProductProvider>
@@ -45,6 +47,8 @@ const Root = () => (
             <Route path={routes.adminProducts} component={AdminProductList} />
             <Route path={routes.editProduct} component={ProductEdit} exact />
             <Route path={routes.adminOrder} component={OrderList} />
+            <Route path={routes.adminUsers} component={UserList} />
+            <Route path={routes.adminEditUser} component={UserEdit} />
           </Switch>
         </MainTemplate>
       </>

@@ -57,9 +57,6 @@ const ProductsScreen = (props) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   useEffect(() => {
     dispatch(listProducts());
-    return () => {
-      //
-    };
   }, []);
 
   // useEffect(() => {
@@ -105,9 +102,9 @@ const ProductsScreen = (props) => {
         <Results> {products.length} results</Results>
       </SearchForm>
       <ItemList>
-        {products.map(({ id, name, image, description, price, category, quantity }) => (
+        {products.map(({ _id, name, image, description, price, category, quantity }) => (
           <ItemCard
-            id={id}
+            id={_id}
             name={name}
             image={image}
             description={
@@ -122,7 +119,7 @@ const ProductsScreen = (props) => {
             price={price}
             category={category}
             quantity={quantity}
-            key={id}
+            key={_id}
             rating={1}
           />
         ))}

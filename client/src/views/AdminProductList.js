@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts, createProduct } from '../actions/productActions';
+import { listProducts, createProduct, deleteProduct } from '../actions/productActions';
 import MessageBox from '../components/atoms/MessageBox/MessageBox';
 import LoadingBox from '../components/atoms/LoadingBox/LoadingBox';
-import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstants';
 
 const AdminProductList = (props) => {
   const productList = useSelector((state) => state.productList);
@@ -16,19 +16,27 @@ const AdminProductList = (props) => {
     success: successCreate,
     product: createdProduct,
   } = productCreate;
+  const productDelete = useSelector((state) => state.productDelete);
+  const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
-      props.history.push(`/products/${createdProduct.id}/edit`);
+      props.history.push(`/products/${createdProduct._id}/edit`);
+    }
+    if (successDelete) {
+      dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate]);
+  }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
 
   const createHandler = () => {
     dispatch(createProduct());
   };
-  const deleteHandler = () => {
-    /// TODO: dispatch delete action
+  const deleteHandler = (product) => {
+    if (window.confirm('Are you sure to delete this product?')) {
+      dispatch(deleteProduct(product._id));
+      window.location.reload(false);
+    }
   };
 
   return (
@@ -39,6 +47,8 @@ const AdminProductList = (props) => {
           Create Product
         </button>
       </div>
+      {loadingDelete && <LoadingBox />}
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loadingCreate && <LoadingBox />}
       {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
       {loading ? (
@@ -58,8 +68,8 @@ const AdminProductList = (props) => {
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
+              <tr key={product._id}>
+                <td>{product._id}</td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
@@ -67,7 +77,7 @@ const AdminProductList = (props) => {
                   <button
                     type="button"
                     className="small"
-                    onClick={() => props.history.push(`/products/${product.id}/edit`)}
+                    onClick={() => props.history.push(`/products/${product._id}/edit`)}
                   >
                     Edit
                   </button>
