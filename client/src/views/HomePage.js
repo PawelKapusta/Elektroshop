@@ -27,7 +27,7 @@ const Newest = styled(Heading)`
   text-transform: uppercase;
   font-size: 45px;
   font-weight: 600;
-  background: linear-gradient(to top left, #66ffff 0%, #6699ff 100%);
+  background: linear-gradient(to top left, #CFCC00 0%, #949100 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;

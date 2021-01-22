@@ -6,6 +6,7 @@ export const Nav = styled.nav`
   background: #f2709c;
   background: -webkit-linear-gradient(to right, #ff9472, #f2709c);
   background: linear-gradient(to right, #ff9472, #f2709c);
+  background: #242222;
   height: 110px;
   display: flex;
   justify-content: space-between;
@@ -27,12 +28,8 @@ export const NavLink = styled(Link)`
     color: #15cdfc;
   }
   &.active {
-    :first-of-type {
-      color: #98fb98;
-    }
-    :last-of-type {
-      color: #000000;
-    }
+  color: #176BBF
+   
   }
 `;
 
