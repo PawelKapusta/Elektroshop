@@ -23,6 +23,7 @@ import OrderList from './AdminOrdersList';
 import '../css/index.css';
 import UserList from './AdminUserList';
 import UserEdit from './AdminEditUser';
+import MapPage from './MapPage';
 
 const Root = () => (
   <ProductProvider>
@@ -49,6 +50,7 @@ const Root = () => (
             <Route path={routes.adminOrder} component={OrderList} />
             <Route path={routes.adminUsers} component={UserList} />
             <Route path={routes.adminEditUser} component={UserEdit} />
+            <Route path={routes.mapAddress} component={MapPage} />
           </Switch>
         </MainTemplate>
       </>

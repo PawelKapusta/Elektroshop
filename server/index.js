@@ -26,6 +26,11 @@ mongoose.connect(
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/config/google", (req, res) => {
+  res.send(
+    process.env.GOOGLE_API_KEY || "AIzaSyBoE-eOy6whEJjEvreic4WuQf5Em_y-1Ko"
+  );
+});
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });

@@ -33,7 +33,6 @@ const PageTitle = styled(Heading)`
 `;
 const Column = styled.div`
   display: table-cell;
-  margin-left: 8%;
 `;
 const Row = styled.div`
   display: table;
@@ -90,12 +89,20 @@ const ProductsScreen = (props) => {
           <Title>Category</Title>
           <Input search onChange={(e) => setSearchCategory(e.target.value)} />
           <Column>
-            <Title> Price from: </Title>
-            <Input search type="number" onChange={(e) => setSearchLowerPrice(e.target.value)} />
-          </Column>
-          <Column>
-            <Title> to: </Title>
-            <Input search type="number" onChange={(e) => setSearchHighestPrice(e.target.value)} />
+            <Row>
+              <Column>
+                <Title> Price min: </Title>
+                <Input search type="number" onChange={(e) => setSearchLowerPrice(e.target.value)} />
+              </Column>
+              <Column>
+                <Title> Price max: </Title>
+                <Input
+                  search
+                  type="number"
+                  onChange={(e) => setSearchHighestPrice(e.target.value)}
+                />
+              </Column>
+            </Row>
           </Column>
         </Row>
         <Results> {filteredProducts.length} results</Results>

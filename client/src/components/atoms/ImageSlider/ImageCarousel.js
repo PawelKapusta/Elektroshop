@@ -3,6 +3,7 @@ import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import styled from 'styled-components';
 import '../../../css/Carousel.css';
 import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 import Heading from '../Heading/Heading';
 import Button from '../Button/Button';
 import { routes } from '../../../Routes';
@@ -53,7 +54,7 @@ const CheckButton = styled(Button)`
   position: absolute;
   top: 31vh;
   right: 33%;
-  font-size: 2rem;
+  font-size: 1.9rem;
   color: #ffff;
   z-index: 12;
   cursor: pointer;
@@ -66,6 +67,15 @@ const CheckButton = styled(Button)`
 `;
 
 const ImageCarousel = ({ slides }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
   const [current, setCurrent] = useState(0);
   const { length } = slides;
   const nextSlide = () => {
@@ -87,9 +97,18 @@ const ImageCarousel = ({ slides }) => {
         {slides.map((slide, index) => (
           <div className={index === current ? 'slide-active' : 'slide'} key={index._id}>
             {index === current && <img src={slide.image} alt="SlideImage" className="image" />}
-            <Link to={`${routes.products}/${slides[index]._id}`} style={{ textDecoration: 'none' }}>
-              <CheckButton>Check it</CheckButton>
-            </Link>
+            <Tooltip
+              disableFocusListener
+              disableTouchListener
+              title={<h1 style={{ fontSize: '14px', lineHeight: 1.6 }}>{slide.name}</h1>}
+            >
+              <Link
+                to={`${routes.products}/${slides[index]._id}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <CheckButton>Check it</CheckButton>
+              </Link>
+            </Tooltip>
           </div>
         ))}
         <LeftArrow onClick={prevSlide} />

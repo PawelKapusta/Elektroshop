@@ -24,14 +24,12 @@ const Info = styled(Paragraph)`
 
 const Contactarea = styled.div`
   margin: 0 auto;
-
   width: 10%;
   top: 0px;
   display: block;
 `;
 
 const Contactinfo = styled.div`
-  margin: auto;
   height: 100%;
   width: 40%;
   margin-left: 30px;
@@ -65,7 +63,7 @@ const Contact = () => (
       <Little>Mon-Fri: 08:00-20:00</Little>
       <Little>Sat-Sun: 09:00-16:00</Little>
       <Info>E-mail</Info>
-      <Little>xxx@sss.com</Little>
+      <Little>project.electroshop@gmail.com</Little>
     </Contactinfo>
     <Contactarea>
       <form className="contact-form" onSubmit={sendEmail}>
@@ -75,8 +73,8 @@ const Contact = () => (
         <Title>Email</Title>
         <Input name="email" />
         <Title>Description</Title>
-        <TextArea description name="message" />
-        <Button style={{ marginTop: '10px' }} type="submit" value="Send">
+        <TextArea description name="message" style={{ border: '1px solid black' }} />
+        <Button style={{ marginTop: '10px', marginBottom: '10%' }} type="submit" value="Send">
           Send
         </Button>
       </form>

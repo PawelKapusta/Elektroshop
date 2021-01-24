@@ -57,7 +57,7 @@ function CartPage(props) {
                         ))}
                       </select>
                     </div>
-                    <div>${item.price}</div>
+                    <div>{item.price} zł</div>
                     <div>
                       <button type="button" onClick={() => removeFromCartHandler(item.product)}>
                         Delete
@@ -74,8 +74,8 @@ function CartPage(props) {
             <ul>
               <li>
                 <h2>
-                  Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : $
-                  {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                  Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) :
+                  {cartItems.reduce((a, c) => a + c.price * c.qty, 0)} zł
                 </h2>
               </li>
               <li>

@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import CheckoutSteps from '../components/checkoutSteps/CheckoutSteps';
 import { saveShippingAddress } from '../actions/cartActions';
 
-const ShippingAddress = (props) => {
+export default function ShippingAddressScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
+
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
+  const [lat, setLat] = useState(shippingAddress.lat);
+  const [lng, setLng] = useState(shippingAddress.lng);
   if (!userInfo) {
     props.history.push('/signin');
   }
@@ -17,14 +20,53 @@ const ShippingAddress = (props) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
   const dispatch = useDispatch();
+  const userAddressMap = useSelector((state) => state.userAddressMap);
+  const { address: addressMap } = userAddressMap;
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ fullName, address, city, postalCode, country }));
-    props.history.push('/payment');
+    const newLat = addressMap ? addressMap.lat : lat;
+    const newLng = addressMap ? addressMap.lng : lng;
+    if (addressMap) {
+      setLat(addressMap.lat);
+      setLng(addressMap.lng);
+      setAddress(addressMap);
+    }
+    let moveOn = true;
+    if (!newLat || !newLng) {
+      moveOn = window.confirm('You did not set your location on map. Continue?');
+    }
+    if (moveOn) {
+      dispatch(
+        saveShippingAddress({
+          fullName,
+          address,
+          city,
+          postalCode,
+          country,
+          lat: newLat,
+          lng: newLng,
+        }),
+      );
+      props.history.push('/payment');
+    }
+  };
+  const chooseOnMap = async () => {
+    dispatch(
+      saveShippingAddress({
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        lat,
+        lng,
+      }),
+    );
+    props.history.push('/map');
   };
   return (
-    <div style={{ position: 'relative', height: '100vh' }}>
-      <CheckoutSteps step1 step2 style={{ marginTop: '15px' }} />
+    <div>
+      <CheckoutSteps step1 step2 />
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>
@@ -86,15 +128,20 @@ const ShippingAddress = (props) => {
           />
         </div>
         <div>
-          <label />
-          {/* eslint-disable */}
-          <button className="primary" type="submit">
-            Go to payments
+          <label htmlFor="chooseOnMap">Location</label>
+          <button type="button" onClick={chooseOnMap}>
+            Look on map
           </button>
+        </div>
+        <div>
+          <label />
+          <button className="primary" type="submit">
+            Continue
+          </button>
+
+          {/* eslint-disable */}
         </div>
       </form>
     </div>
   );
-};
-
-export default ShippingAddress;
+}

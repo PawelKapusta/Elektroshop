@@ -14,6 +14,7 @@ const StyledInput = styled(Input)`
   margin: 0 0 30px 0;
   height: 40px;
   width: 300px;
+  border: 1px solid black;
 `;
 
 const StyledLink = styled(Link)`

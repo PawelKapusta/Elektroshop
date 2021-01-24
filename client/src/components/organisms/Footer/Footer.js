@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Logo2 from '../../../assets/images/Logo2.png';
 
 export const Foot = styled.div`
-  margin-top: 10px;
   bottom: 0px;
   width: 100%;
   height: 100px;

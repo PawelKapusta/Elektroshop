@@ -36,6 +36,7 @@ const HomePage = () => {
   console.log('prod', products);
   const productsSortedByQuantity = products.sort((a, b) => a.quantity - b.quantity).slice(0, 3);
   const productsSortedByID = products.sort((a, b) => b._id - a._id).slice(0, 3);
+
   return (
     <CardsSection>
       <ImageCarousel slides={productsSortedByQuantity} />

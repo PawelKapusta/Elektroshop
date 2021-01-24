@@ -8,7 +8,7 @@ const Input = styled.input`
   background-color: ${({ theme }) => theme.grey100};
   border: none;
   border-radius: 50px;
-
+  border: 1px solid black;
   ::placeholder {
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -25,8 +25,8 @@ const Input = styled.input`
       background-position: 15px 50%;
       background-repeat: no-repeat;
     `}
-    
-    ${({ description }) =>
+
+  ${({ description }) =>
     description &&
     css`
       padding: 10px 20px 10px 40px;
@@ -37,7 +37,5 @@ const Input = styled.input`
       background-repeat: no-repeat;
     `}
 `;
-
-
 
 export default Input;

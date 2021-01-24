@@ -18,4 +18,5 @@ export const routes = {
   adminOrder: '/orderList',
   adminUsers: '/userlist',
   adminEditUser: '/user/:id/edit',
+  mapAddress: '/map',
 };
