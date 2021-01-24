@@ -23,7 +23,7 @@ const UserList = (props) => {
     }
   };
   return (
-    <div>
+    <div style={{ position: 'relative', height: '100vh' }}>
       <h1>Users</h1>
       {loadingDelete && <LoadingBox />}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}

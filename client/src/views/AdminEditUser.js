@@ -37,7 +37,7 @@ const UserEdit = (props) => {
     dispatch(updateUser({ _id: userId, name, email, isAdmin }));
   };
   return (
-    <div>
+    <div style={{ position: 'relative', height: '100vh' }}>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit User {name}</h1>

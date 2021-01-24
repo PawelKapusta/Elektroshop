@@ -12,7 +12,7 @@ const OrderHistory = (props) => {
     dispatch(listOrderMine());
   }, [dispatch]);
   return (
-    <div>
+    <div style={{ height: '100vh', marginTop: '3%' }}>
       <h1>Order History</h1>
       {loading ? (
         <LoadingBox />

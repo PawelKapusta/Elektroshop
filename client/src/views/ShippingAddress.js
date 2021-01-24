@@ -23,7 +23,7 @@ const ShippingAddress = (props) => {
     props.history.push('/payment');
   };
   return (
-    <div style={{ height: '67vh' }}>
+    <div style={{ position: 'relative', height: '100vh' }}>
       <CheckoutSteps step1 step2 style={{ marginTop: '15px' }} />
       <form className="form" onSubmit={submitHandler}>
         <div>

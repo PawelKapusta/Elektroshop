@@ -14,7 +14,7 @@ const MainTemplate = ({ children }) => (
       <>
         <MainNavbar />
         {children}
-        <Footer />
+        <Footer style={{ position: 'relative', bottom: '0', width: '100%' }} />
       </>
     </ThemeProvider>
   </div>
