@@ -144,3 +144,10 @@ img.large {
 .table button {
   margin: 0 0.2rem;
 }
+.rating span {
+  color: #f0c040;
+  margin: 0.1rem;
+}
+.rating span:last-child {
+  color: #404040;
+}

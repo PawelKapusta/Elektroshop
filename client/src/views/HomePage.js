@@ -27,7 +27,7 @@ const Newest = styled(Heading)`
   text-transform: uppercase;
   font-size: 45px;
   font-weight: 600;
-  background: linear-gradient(to top left, #CFCC00 0%, #949100 100%);
+  background: linear-gradient(to top left, #cfcc00 0%, #949100 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
@@ -35,15 +35,15 @@ const HomePage = () => {
   const { products } = useContext(ProductContext);
   console.log('prod', products);
   const productsSortedByQuantity = products.sort((a, b) => a.quantity - b.quantity).slice(0, 3);
-  const productsSortedByID = products.sort((a, b) => b.id - a.id).slice(0, 3);
+  const productsSortedByID = products.sort((a, b) => b._id - a._id).slice(0, 3);
   return (
     <CardsSection>
       <ImageCarousel slides={productsSortedByQuantity} />
       <Newest>New items</Newest>
       <Row>
-        {productsSortedByID.map(({ image, name, price, id }) => (
+        {productsSortedByID.map(({ image, name, price, _id }) => (
           <Column>
-            <HomeCard image={image} name={name} price={price} id={id} key={id} />
+            <HomeCard image={image} name={name} price={price} id={_id} key={_id} />
           </Column>
         ))}
       </Row>
@@ -55,7 +55,7 @@ HomePage.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,

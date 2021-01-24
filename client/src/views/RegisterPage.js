@@ -73,7 +73,7 @@ const RegisterPage = (props) => {
       {error && <MessageBox variant="danger">{error}</MessageBox>}
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <Heading>Sign up</Heading>
+          <Heading style={{ marginLeft: '35%' }}>Sign up</Heading>
         </div>
         {/* eslint-disable */}
         <StyledForm>

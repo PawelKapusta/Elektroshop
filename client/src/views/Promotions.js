@@ -26,9 +26,9 @@ const Promotions = () => {
       <PageTitle>Promotions</PageTitle>
       <ItemList>
         {products
-          .map(({ id, name, image, description, price, category, quantity }) => (
+          .map(({ _id, name, image, description, price, category, quantity }) => (
             <ItemCardPromotions
-              id={id}
+              id={_id}
               name={name}
               image={image}
               description={
@@ -44,7 +44,7 @@ const Promotions = () => {
               newPrice={price}
               category={category}
               quantity={quantity}
-              key={id}
+              key={_id}
             />
           ))
           .slice(0, 7)}

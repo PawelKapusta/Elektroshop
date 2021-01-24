@@ -6,7 +6,6 @@ import productRouter from "./routers/productRouter";
 import "./routers/orderRouter";
 import cors from "cors";
 import orderRouter from "./routers/orderRouter";
-import path from "path";
 
 const app = express();
 dotenv.config();

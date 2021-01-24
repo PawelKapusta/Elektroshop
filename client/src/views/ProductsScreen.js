@@ -10,6 +10,7 @@ import { listProducts } from '../actions/productActions';
 import ProductContext from '../context/ProductContext';
 import LoadingBox from '../components/atoms/LoadingBox/LoadingBox';
 import MessageBox from '../components/atoms/MessageBox/MessageBox';
+import Button from '../components/atoms/Button/Button';
 
 const SearchForm = styled.div`
   margin-left: 5%;
@@ -32,14 +33,16 @@ const PageTitle = styled(Heading)`
 `;
 const Column = styled.div`
   display: table-cell;
+  margin-left: 8%;
 `;
 const Row = styled.div`
   display: table;
-  width: 40%;
+  width: 80%;
   border-spacing: 10px;
+  margin-left: 10%;
 `;
 const Results = styled(Paragraph)`
-  margin: 1% 2%;
+  margin: 1% 12%;
   font-weight: 600;
   font-size: 1.9rem;
   color: #dc143c;
@@ -55,22 +58,22 @@ const ProductsScreen = (props) => {
   const [searchLowerPrice, setSearchLowerPrice] = useState(0);
   const [searchHighestPrice, setSearchHighestPrice] = useState(Number.MAX_VALUE);
   const [filteredProducts, setFilteredProducts] = useState(products);
-  useEffect(() => {
+
+  useEffect(async () => {
     dispatch(listProducts());
   }, []);
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchProductName.toLowerCase()) &&
+          product.category.toLowerCase().includes(searchCategory.toLowerCase()) &&
+          product.price >= searchLowerPrice &&
+          product.price <= searchHighestPrice,
+      ),
+    );
+  }, [searchProductName, searchCategory, searchLowerPrice, searchHighestPrice]);
 
-  // useEffect(() => {
-  //   setFilteredProducts(
-  //     filteredProducts.filter(
-  //       (product) =>
-  //         product.name.toLowerCase().includes(searchProductName.toLowerCase()) &&
-  //         product.category.toLowerCase().includes(searchCategory.toLowerCase()) &&
-  //         product.price >= searchLowerPrice &&
-  //         product.price <= searchHighestPrice,
-  //     ),
-  //   );
-  // }, [filteredProducts, searchProductName, searchCategory, searchLowerPrice, searchHighestPrice]);
-  // data.products.find((x) => x.id === parseInt(props.match.params.id, 10))
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -79,30 +82,26 @@ const ProductsScreen = (props) => {
     <div>
       <PageTitle>Search for product</PageTitle>
       <SearchForm>
-        <Title>Name of product</Title>
-        <Input search onChange={(e) => setSearchProductName(e.target.value)} />
-        <Title>Category</Title>
-        <Input search onChange={(e) => setSearchCategory(e.target.value)} />
         <Row>
           <Column>
-            {' '}
-            <Title> Price from: </Title>{' '}
+            <Title>Name of product</Title>
+            <Input search onChange={(e) => setSearchProductName(e.target.value)} />
           </Column>
+          <Title>Category</Title>
+          <Input search onChange={(e) => setSearchCategory(e.target.value)} />
           <Column>
-            {' '}
-            <Input type="number" onChange={(e) => setSearchLowerPrice(e.target.value)} />
+            <Title> Price from: </Title>
+            <Input search type="number" onChange={(e) => setSearchLowerPrice(e.target.value)} />
           </Column>
           <Column>
             <Title> to: </Title>
-          </Column>
-          <Column>
-            <Input type="number" onChange={(e) => setSearchHighestPrice(e.target.value)} />
+            <Input search type="number" onChange={(e) => setSearchHighestPrice(e.target.value)} />
           </Column>
         </Row>
-        <Results> {products.length} results</Results>
+        <Results> {filteredProducts.length} results</Results>
       </SearchForm>
       <ItemList>
-        {products.map(({ _id, name, image, description, price, category, quantity }) => (
+        {filteredProducts.map(({ _id, name, image, description, price, category, quantity }) => (
           <ItemCard
             id={_id}
             name={name}

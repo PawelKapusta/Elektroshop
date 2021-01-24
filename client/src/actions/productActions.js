@@ -26,6 +26,7 @@ export const listProducts = () => async (dispatch) => {
   });
   try {
     const { data } = await axios.get('http://localhost:5000/api/products');
+
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -90,9 +91,13 @@ export const createReview = (productId, review) => async (dispatch, getState) =>
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.post(`/api/products/${productId}/reviews`, review, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = await axios.post(
+      `http://localhost:5000/api/products/${productId}/reviews`,
+      review,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({
       type: PRODUCT_REVIEW_CREATE_SUCCESS,
       payload: data.review,

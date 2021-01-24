@@ -6,11 +6,10 @@ import '../css/Main.css';
 import MessageBox from '../components/atoms/MessageBox/MessageBox';
 
 function CartPage(props) {
-  const productId = Number(props.match.params.id);
+  const productId = props.match.params.id;
   const qty = props.location.search ? Number(props.location.search.split('=')[1]) : 1;
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
-
+  const { cartItems, error } = cart;
   const dispatch = useDispatch();
   useEffect(() => {
     if (productId) {
@@ -29,6 +28,7 @@ function CartPage(props) {
     <div className="row top">
       <div className="col-2">
         <h1>Shopping Cart</h1>
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
             Cart is empty. <Link to="/">Go Shopping</Link>
@@ -42,7 +42,7 @@ function CartPage(props) {
                     <img src={item.image} alt={item.name} className="small" />
                   </div>
                   <div className="min-30">
-                    <Link to={`/products/${item.product}`}>{item.name}</Link>
+                    <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </div>
                   <div>
                     <select
@@ -56,7 +56,7 @@ function CartPage(props) {
                       ))}
                     </select>
                   </div>
-                  <div>{item.price} zł</div>
+                  <div>${item.price}</div>
                   <div>
                     <button type="button" onClick={() => removeFromCartHandler(item.product)}>
                       Delete
@@ -73,15 +73,15 @@ function CartPage(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) :
-                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)} zł
+                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : $
+                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
               </h2>
             </li>
             <li>
               <button
                 type="button"
-                className="primary block"
                 onClick={checkoutHandler}
+                className="primary block"
                 disabled={cartItems.length === 0}
               >
                 Proceed to Checkout
