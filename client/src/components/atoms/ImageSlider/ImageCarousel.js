@@ -85,9 +85,9 @@ const ImageCarousel = ({ slides }) => {
       <Popular>The most popular items</Popular>
       <Carousel>
         {slides.map((slide, index) => (
-          <div className={index === current ? 'slide-active' : 'slide'} key={index.id}>
+          <div className={index === current ? 'slide-active' : 'slide'} key={index._id}>
             {index === current && <img src={slide.image} alt="SlideImage" className="image" />}
-            <Link to={`${routes.products}/${slides[index].id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`${routes.products}/${slides[index]._id}`} style={{ textDecoration: 'none' }}>
               <CheckButton>Check it</CheckButton>
             </Link>
           </div>

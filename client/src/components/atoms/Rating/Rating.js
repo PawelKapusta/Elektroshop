@@ -8,41 +8,61 @@ const Rating = (props) => {
   return (
     <div>
       <stars>
-        <i
-          className={
-            rating >= 1 ? <StarIcon /> : rating >= 0.5 ? <StarHalfIcon /> : <StarOutlineIcon />
-          }
-        />
+        <i>
+          {rating >= 1 ? (
+            <StarIcon style={{ color: '#DAA520' }} />
+          ) : rating >= 0.5 ? (
+            <StarHalfIcon style={{ color: '#DAA520' }} />
+          ) : (
+            <StarOutlineIcon style={{ color: '#DAA520' }} />
+          )}
+        </i>
       </stars>
       <stars>
-        <i
-          className={
-            rating >= 2 ? <StarIcon /> : rating >= 1.5 ? <StarHalfIcon /> : <StarOutlineIcon />
-          }
-        />
+        <i>
+          {rating >= 2 ? (
+            <StarIcon style={{ color: '#DAA520' }} />
+          ) : rating >= 1.5 ? (
+            <StarHalfIcon style={{ color: '#DAA520' }} />
+          ) : (
+            <StarOutlineIcon style={{ color: '#DAA520' }} />
+          )}
+        </i>
       </stars>
       <stars>
-        <i
-          className={
-            rating >= 3 ? <StarIcon /> : rating >= 2.5 ? <StarHalfIcon /> : <StarOutlineIcon />
-          }
-        />
+        <i>
+          {rating >= 3 ? (
+            <StarIcon style={{ color: '#DAA520' }} />
+          ) : rating >= 2.5 ? (
+            <StarHalfIcon style={{ color: '#DAA520' }} />
+          ) : (
+            <StarOutlineIcon style={{ color: '#DAA520' }} />
+          )}
+        </i>
       </stars>
       <stars>
-        <i
-          className={
-            rating >= 4 ? <StarIcon /> : rating >= 3.5 ? <StarHalfIcon /> : <StarOutlineIcon />
-          }
-        />
+        <i>
+          {rating >= 4 ? (
+            <StarIcon style={{ color: '#DAA520' }} />
+          ) : rating >= 3.5 ? (
+            <StarHalfIcon style={{ color: '#DAA520' }} />
+          ) : (
+            <StarOutlineIcon style={{ color: '#DAA520' }} />
+          )}
+        </i>
       </stars>
       <stars>
-        <i
-          className={
-            rating >= 5 ? <StarIcon /> : rating >= 4.5 ? <StarHalfIcon /> : <StarOutlineIcon />
-          }
-        />
+        <i>
+          {rating >= 5 ? (
+            <StarIcon style={{ color: '#DAA520' }} />
+          ) : rating >= 4.5 ? (
+            <StarHalfIcon style={{ color: '#DAA520' }} />
+          ) : (
+            <StarOutlineIcon style={{ color: '#DAA520' }} />
+          )}
+        </i>
       </stars>
-      <stars>{numReviews} reviews</stars>
+      <stars> {numReviews} review/s</stars>
     </div>
   );
 };
