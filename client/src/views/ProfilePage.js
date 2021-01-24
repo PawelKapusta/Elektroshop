@@ -10,6 +10,7 @@ const Profile = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [company, setCompany] = useState('');
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -25,6 +26,7 @@ const Profile = () => {
     } else {
       setName(user.name);
       setEmail(user.email);
+      setCompany(user.company);
     }
   }, [dispatch, userInfo.id, user]);
   const submitHandler = (e) => {
@@ -32,11 +34,11 @@ const Profile = () => {
     if (password !== confirmPassword) {
       alert('Password and Confirm Password Are Not Matched');
     } else {
-      dispatch(updateUserProfile({ userId: user.id, name, email, password }));
+      dispatch(updateUserProfile({ userId: user.id, name, email, password, company }));
     }
   };
   return (
-    <div>
+    <div style={{ position: 'relative', height: '100vh', marginTop: '5%' }}>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>User Profile</h1>
@@ -71,6 +73,16 @@ const Profile = () => {
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="company">Company</label>
+              <input
+                id="company"
+                type="text"
+                placeholder="Enter company name"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
               />
             </div>
             <div>

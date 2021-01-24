@@ -81,7 +81,7 @@ const MainNavbar = () => {
             Cart {cartItems.length > 0 && <span className="badge">{cartItems.length}</span>}
           </NavLink>
         </NavMenu>{' '}
-        <ListDiv>
+        <ListDiv style={{ zIndex: '1' }}>
           {userInfo ? (
             <List component="nav" aria-labelledby="nested-list-subheader" className={classes.root}>
               <ListItem button onClick={handleClick}>
@@ -147,12 +147,6 @@ const MainNavbar = () => {
                     {'Admin Panel'}
                   </Button>
                   <Menu {...bindMenu(popupState)}>
-                    <MenuItem
-                      onClick={popupState.close}
-                      style={{ paddingRight: '50px', fontSize: '15px' }}
-                    >
-                      <Link to="/dashboard">Dashboard</Link>
-                    </MenuItem>
                     <MenuItem
                       onClick={popupState.close}
                       style={{ paddingRight: '50px', fontSize: '15px' }}

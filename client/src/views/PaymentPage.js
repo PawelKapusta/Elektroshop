@@ -17,7 +17,7 @@ const PaymentMethodScreen = (props) => {
     props.history.push('/placeorder');
   };
   return (
-    <div>
+    <div style={{ position: 'relative', height: '100vh' }}>
       <CheckoutSteps step1 step2 step3 />
       <form className="form" onSubmit={submitHandler}>
         <div>

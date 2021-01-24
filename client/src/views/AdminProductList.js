@@ -40,7 +40,7 @@ const AdminProductList = (props) => {
   };
 
   return (
-    <div>
+    <div style={{ bottom: '0' }}>
       <h1>Products</h1>
       <div className="row">
         <button type="button" className="primary" onClick={createHandler}>

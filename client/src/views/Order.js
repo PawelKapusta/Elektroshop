@@ -31,7 +31,7 @@ export default function Order(props) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div style={{ position: 'relative', height: '100vh' }}>
       <h1>Order {order._id}</h1>
       <div className="row top">
         <div className="col-2">

@@ -18,7 +18,8 @@ const PlaceOrder = (props) => {
   const toPrice = (num) => Number(num.toFixed(2));
   cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0));
   cart.shippingPrice = cart.itemsPrice > 300 ? toPrice(0) : toPrice(10);
-  cart.taxPrice = toPrice(0.1 * cart.itemsPrice);
+  cart.taxPrice =
+    cart.shippingAddress.country.toLowerCase() === 'poland' ? 0 : toPrice(0.05 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = () => {
@@ -33,7 +34,7 @@ const PlaceOrder = (props) => {
   }, [dispatch, order, props.history, success]);
 
   return (
-    <div>
+    <div style={{ height: '80vh' }}>
       <CheckoutSteps step1 step2 step3 step4 />
       <div className="row top">
         <div className="col-2">

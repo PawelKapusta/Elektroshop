@@ -59,7 +59,7 @@ const ProductsScreen = (props) => {
   const [searchHighestPrice, setSearchHighestPrice] = useState(Number.MAX_VALUE);
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(listProducts());
   }, []);
   useEffect(() => {
@@ -79,7 +79,7 @@ const ProductsScreen = (props) => {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div style={{ height: '100%', bottom: ' 0' }}>
       <PageTitle>Search for product</PageTitle>
       <SearchForm>
         <Row>

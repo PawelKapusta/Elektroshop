@@ -22,7 +22,7 @@ const OrderList = (props) => {
     }
   };
   return (
-    <div>
+    <div style={{ position: 'relative', height: '100vh' }}>
       <h1>Orders</h1>
       {loadingDelete && <LoadingBox />}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
