@@ -67,16 +67,26 @@ const ProductScreen = (props) => {
               />
             </div>
             <div className="col-1">
-              <ul>
+              <ul
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '3%',
+                  padding: '2%',
+                  marginRight: '8%',
+                }}
+              >
                 <li>
                   <h1>{product.name}</h1>
                 </li>
                 <li>
                   <Rating rating={product.rating} numReviews={product.numReviews} />
                 </li>
-                <li>Price : {product.price} zł</li>
                 <li>
-                  Description:
+                  {' '}
+                  <b>Price :</b> {product.price} zł
+                </li>
+                <li style={{ fontSize: '18px', textAlign: 'justify' }}>
+                  <b>Description: </b>
                   <p>{product.description}</p>
                 </li>
               </ul>
@@ -130,23 +140,48 @@ const ProductScreen = (props) => {
               </div>
             </div>
           </div>
-          <div style={{ marginLeft: '10%', marginTop: '5%' }}>
-            <h2 id="reviews">Reviews</h2>
+          <div
+            style={{
+              marginLeft: '10%',
+              marginTop: '5%',
+            }}
+          >
+            <h2 id="reviews" style={{ fontSize: '20px', fontWeight: '600' }}>
+              Reviews
+            </h2>
             {product.reviews === 0 && <MessageBox>There is no review</MessageBox>}
             <ul>
               {product.reviews?.map((review) => (
-                <li key={review._id}>
+                <li
+                  key={review._id}
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '1%',
+                    padding: '2%',
+                    marginRight: '8%',
+                    boxShadow: '5px 10px #888888',
+                  }}
+                >
                   <strong>{review.name}</strong>
                   <Rating rating={review.rating} caption=" " />
                   <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
+                  <p style={{ marginLeft: '1%' }}>{review.comment}</p>
                 </li>
               ))}
               <li>
                 {userInfo ? (
                   <form className="form" onSubmit={submitHandler}>
                     <div>
-                      <h2>Write a customer review</h2>
+                      <h2
+                        style={{
+                          fontSize: '20px',
+                          fontWeight: '600',
+                          textAlign: 'center',
+                          marginRight: '3%',
+                        }}
+                      >
+                        Write a customer review
+                      </h2>
                     </div>
                     <div>
                       <label htmlFor="rating">Rating</label>
@@ -169,6 +204,7 @@ const ProductScreen = (props) => {
                         id="comment"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
+                        style={{ padding: '8%' }}
                       />
                     </div>
                     <div>
