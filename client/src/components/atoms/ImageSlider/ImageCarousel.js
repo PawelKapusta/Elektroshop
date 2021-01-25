@@ -95,21 +95,23 @@ const ImageCarousel = ({ slides }) => {
       <Popular>The most popular items</Popular>
       <Carousel>
         {slides.map((slide, index) => (
-          <div className={index === current ? 'slide-active' : 'slide'} key={index._id}>
-            {index === current && <img src={slide.image} alt="SlideImage" className="image" />}
-            <Tooltip
-              disableFocusListener
-              disableTouchListener
-              title={<h1 style={{ fontSize: '14px', lineHeight: 1.6 }}>{slide.name}</h1>}
-            >
+          <Tooltip
+            disableFocusListener
+            disableTouchListener
+            title={<h1 style={{ fontSize: '14px', lineHeight: 1.6 }}>{slide.name}</h1>}
+            placement="bottom-end"
+          >
+            <div className={index === current ? 'slide-active' : 'slide'} key={index._id}>
+              {index === current && <img src={slide.image} alt="SlideImage" className="image" />}
+
               <Link
                 to={`${routes.products}/${slides[index]._id}`}
                 style={{ textDecoration: 'none' }}
               >
                 <CheckButton>Check it</CheckButton>
               </Link>
-            </Tooltip>
-          </div>
+            </div>
+          </Tooltip>
         ))}
         <LeftArrow onClick={prevSlide} />
         <RightArrow onClick={nextSlide} />
